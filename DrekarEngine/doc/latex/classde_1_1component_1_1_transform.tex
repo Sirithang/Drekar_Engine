@@ -1,0 +1,76 @@
+\hypertarget{classde_1_1component_1_1_transform}{
+\section{de\-:\-:component\-:\-:\-Transform \-Class \-Reference}
+\label{classde_1_1component_1_1_transform}\index{de\-::component\-::\-Transform@{de\-::component\-::\-Transform}}
+}
+\-Inheritance diagram for de\-:\-:component\-:\-:\-Transform\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classde_1_1component_1_1_transform}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classde_1_1component_1_1_transform_aa633f78f603b073ded87ce3d76d68c9f}{
+void \hyperlink{classde_1_1component_1_1_transform_aa633f78f603b073ded87ce3d76d68c9f}{update} ()}
+\label{classde_1_1component_1_1_transform_aa633f78f603b073ded87ce3d76d68c9f}
+
+\begin{DoxyCompactList}\small\item\em called each update \end{DoxyCompactList}\item 
+\hypertarget{classde_1_1component_1_1_transform_a21e27db96b4445b5c970633265c13296}{
+bool \hyperlink{classde_1_1component_1_1_transform_a21e27db96b4445b5c970633265c13296}{recomputed} () const }
+\label{classde_1_1component_1_1_transform_a21e27db96b4445b5c970633265c13296}
+
+\begin{DoxyCompactList}\small\item\em this return true if the transform was recomputed this frame. \-As \hyperlink{classde_1_1component_1_1_transform}{\-Transform} is always the first to be updated, this allow other component to know if the game\-Object was moved or changed in any manner \end{DoxyCompactList}\item 
+\hypertarget{classde_1_1component_1_1_transform_a01da3717d44a091953ce85e5ca6e3a4f}{
+glm\-::mat4 \hyperlink{classde_1_1component_1_1_transform_a01da3717d44a091953ce85e5ca6e3a4f}{matrix} () const }
+\label{classde_1_1component_1_1_transform_a01da3717d44a091953ce85e5ca6e3a4f}
+
+\begin{DoxyCompactList}\small\item\em return the matrix combining all transformation \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classde_1_1component_1_1_transform_a1a0d80838c02e57bc271516572784ee4}{
+glm\-::vec3 {\bfseries m\-Position}}
+\label{classde_1_1component_1_1_transform_a1a0d80838c02e57bc271516572784ee4}
+
+\item 
+\hypertarget{classde_1_1component_1_1_transform_a791f59c644c4af4d31ac000a61eb4716}{
+glm\-::vec3 {\bfseries m\-Local\-Position}}
+\label{classde_1_1component_1_1_transform_a791f59c644c4af4d31ac000a61eb4716}
+
+\item 
+\hypertarget{classde_1_1component_1_1_transform_acde4ad08f2bb859b01885b6133f43e53}{
+glm\-::quat {\bfseries m\-Rotation}}
+\label{classde_1_1component_1_1_transform_acde4ad08f2bb859b01885b6133f43e53}
+
+\item 
+\hypertarget{classde_1_1component_1_1_transform_ac4a7eecdbe7457b3331e26a4c9e4939b}{
+glm\-::quat {\bfseries m\-Local\-Rotation}}
+\label{classde_1_1component_1_1_transform_ac4a7eecdbe7457b3331e26a4c9e4939b}
+
+\item 
+\hypertarget{classde_1_1component_1_1_transform_a64bdb4a44b50f610c6fb34b13d74f65f}{
+glm\-::vec3 {\bfseries m\-Local\-Scale}}
+\label{classde_1_1component_1_1_transform_a64bdb4a44b50f610c6fb34b13d74f65f}
+
+\item 
+\hypertarget{classde_1_1component_1_1_transform_a46f0487729770e66da59ddc8df4fe02e}{
+glm\-::mat4x4 {\bfseries m\-Matrix}}
+\label{classde_1_1component_1_1_transform_a46f0487729770e66da59ddc8df4fe02e}
+
+\item 
+\hypertarget{classde_1_1component_1_1_transform_a8ec6eb4a7ec9b73e08f1b6e5bf7c1299}{
+bool {\bfseries m\-Changed}}
+\label{classde_1_1component_1_1_transform_a8ec6eb4a7ec9b73e08f1b6e5bf7c1299}
+
+\item 
+\hypertarget{classde_1_1component_1_1_transform_a8d1518abb22163f75fff74b98b814d19}{
+bool {\bfseries m\-Recomputed}}
+\label{classde_1_1component_1_1_transform_a8d1518abb22163f75fff74b98b814d19}
+
+\end{DoxyCompactItemize}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+include/component/\-Transform.\-h\end{DoxyCompactItemize}

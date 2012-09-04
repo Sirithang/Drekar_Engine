@@ -1,0 +1,79 @@
+\hypertarget{classde_1_1_game_object}{
+\section{de\-:\-:\-Game\-Object \-Class \-Reference}
+\label{classde_1_1_game_object}\index{de\-::\-Game\-Object@{de\-::\-Game\-Object}}
+}
+\-Inheritance diagram for de\-:\-:\-Game\-Object\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classde_1_1_game_object}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classde_1_1_game_object_a68be8d3d6c07b8ffddb22b7758a36b51}{
+{\bfseries \-Game\-Object} (std\-::string p\-Name)}
+\label{classde_1_1_game_object_a68be8d3d6c07b8ffddb22b7758a36b51}
+
+\item 
+\hypertarget{classde_1_1_game_object_a7cf452c9ec1ad16d2f45d493f51974a7}{
+void {\bfseries release} ()}
+\label{classde_1_1_game_object_a7cf452c9ec1ad16d2f45d493f51974a7}
+
+\item 
+\hypertarget{classde_1_1_game_object_adaa68cb3c475ade540ab527543210096}{
+virtual void \hyperlink{classde_1_1_game_object_adaa68cb3c475ade540ab527543210096}{update} ()}
+\label{classde_1_1_game_object_adaa68cb3c475ade540ab527543210096}
+
+\begin{DoxyCompactList}\small\item\em override this to implement per-\/frame behavior. \-It's called before interal\-Update, mean that component get updated \-A\-F\-T\-E\-R this. \-This allow to modify their values and see this repercuted this frame.) \end{DoxyCompactList}\item 
+\hypertarget{classde_1_1_game_object_a7530cc647d3c51516a710dd91cc99c09}{
+virtual void \hyperlink{classde_1_1_game_object_a7530cc647d3c51516a710dd91cc99c09}{draw} ()}
+\label{classde_1_1_game_object_a7530cc647d3c51516a710dd91cc99c09}
+
+\begin{DoxyCompactList}\small\item\em override this to define a behaviour just before drawing \end{DoxyCompactList}\item 
+\hypertarget{classde_1_1_game_object_a113db17ce4217a18053e4125a936eb41}{
+\hyperlink{classde_1_1_a_component}{\-A\-Component} $\ast$ \hyperlink{classde_1_1_game_object_a113db17ce4217a18053e4125a936eb41}{add\-Component} (\hyperlink{classde_1_1_a_component}{\-A\-Component} $\ast$p\-Component)}
+\label{classde_1_1_game_object_a113db17ce4217a18053e4125a936eb41}
+
+\begin{DoxyCompactList}\small\item\em add a component to the gameobject return the component passed as argument for chaining \end{DoxyCompactList}\item 
+\hypertarget{classde_1_1_game_object_a6f25a7fe1d2ec1ae206a8dc52733a4d6}{
+\hyperlink{classde_1_1component_1_1_transform}{component\-::\-Transform} $\ast$ \hyperlink{classde_1_1_game_object_a6f25a7fe1d2ec1ae206a8dc52733a4d6}{transform} ()}
+\label{classde_1_1_game_object_a6f25a7fe1d2ec1ae206a8dc52733a4d6}
+
+\begin{DoxyCompactList}\small\item\em simply a shortcut to the transform component of this \hyperlink{classde_1_1_game_object}{\-Game\-Object} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classde_1_1_game_object_a946fc91be8a39c450f985d8852f3ed02}{
+\hyperlink{classde_1_1_game_object}{\-Game\-Object} $\ast$ {\bfseries m\-Parent}}
+\label{classde_1_1_game_object_a946fc91be8a39c450f985d8852f3ed02}
+
+\item 
+\hypertarget{classde_1_1_game_object_a1faf0cb425332b0d252dad8082089fd8}{
+std\-::list$<$ \hyperlink{classde_1_1_game_object}{\-Game\-Object} $\ast$ $>$ {\bfseries m\-Children}}
+\label{classde_1_1_game_object_a1faf0cb425332b0d252dad8082089fd8}
+
+\item 
+\hypertarget{classde_1_1_game_object_a1d5028e8aef6e3643d834fdfc555db61}{
+std\-::list$<$ \hyperlink{classde_1_1_a_component}{\-A\-Component} $\ast$ $>$ {\bfseries m\-Components}}
+\label{classde_1_1_game_object_a1d5028e8aef6e3643d834fdfc555db61}
+
+\item 
+\hypertarget{classde_1_1_game_object_a4e0cccd0d009116e04fd92cc3d746a33}{
+\hyperlink{classde_1_1component_1_1_transform}{component\-::\-Transform} $\ast$ {\bfseries m\-Transform}}
+\label{classde_1_1_game_object_a4e0cccd0d009116e04fd92cc3d746a33}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classde_1_1_game_object_ae1b9dd8d05ef01c165957ca5bbf66e72}{
+class {\bfseries \-A\-Screen}}
+\label{classde_1_1_game_object_ae1b9dd8d05ef01c165957ca5bbf66e72}
+
+\end{DoxyCompactItemize}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+include/core/\-Gameobject.\-h\end{DoxyCompactItemize}

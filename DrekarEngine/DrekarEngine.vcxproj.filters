@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Data">
+      <UniqueIdentifier>{0e863295-313d-4779-9f6d-926c2a385357}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Data">
+      <UniqueIdentifier>{8f27c62a-8b27-4ee7-844c-5c911f309d45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core">
+      <UniqueIdentifier>{fb0affd5-e665-4d5d-ae85-d8e8c1a160f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{c619b5af-c81c-488c-bb7a-283034357f74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\renderer">
+      <UniqueIdentifier>{2eab7cf0-4d7c-486f-a61d-39d5c59ed0e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\renderer">
+      <UniqueIdentifier>{8d6b7a17-ba82-4114-8972-44556393f1bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\internal">
+      <UniqueIdentifier>{22bbd14b-f61c-4607-9047-16af34857e52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\component">
+      <UniqueIdentifier>{9e2a1e1c-9907-4e5e-8cda-38b74a524de0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\component\light">
+      <UniqueIdentifier>{85adc5a6-155e-4d3e-8836-49b9dee534b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\component">
+      <UniqueIdentifier>{551f0789-57c8-46e9-8d5f-f10c6e07d0a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\component\light">
+      <UniqueIdentifier>{436df8a6-d97b-4dfb-8d7a-13246a5b7106}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include=".\src\data\Mesh.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\data\Shader.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Engine.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Debug.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Program.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\AScreen.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Gameobject.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include=".\src\core\AComponent.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\component\Transform.cpp">
+      <Filter>Source Files\component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\component\Camera.cpp">
+      <Filter>Source Files\component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\component\MeshRenderer.cpp">
+      <Filter>Source Files\component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Material.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\Renderer.cpp">
+      <Filter>Source Files\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\GameTime.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\data\Texture.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\RenderBuffer.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Helpers.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\component\light\Light.cpp">
+      <Filter>Source Files\component\light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\component\light\DirectionalLight.cpp">
+      <Filter>Source Files\component\light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\component\light\PointLight.cpp">
+      <Filter>Source Files\component\light</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\export.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\data\Mesh.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\Engine.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\data\Shader.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\Debug.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\Program.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include=".\include\core\CountedObject.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include=".\include\core\AScreen.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\Gameobject.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\component\Transform.h">
+      <Filter>Header Files\component</Filter>
+    </ClInclude>
+    <ClInclude Include=".\include\core\AComponent.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\component\Camera.h">
+      <Filter>Header Files\component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\component\MeshRenderer.h">
+      <Filter>Header Files\component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\Material.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\GameTime.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\Renderer.h">
+      <Filter>Header Files\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\data\Texture.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\RenderBuffer.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\Helpers.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\internal\InternalData.h">
+      <Filter>Header Files\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\component\light\Light.h">
+      <Filter>Header Files\component\light</Filter>
+    </ClInclude>
+    <ClInclude Include="include\component\light\DirectionalLight.h">
+      <Filter>Header Files\component\light</Filter>
+    </ClInclude>
+    <ClInclude Include="include\component\light\PointLight.h">
+      <Filter>Header Files\component\light</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

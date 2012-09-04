@@ -1,0 +1,108 @@
+\hypertarget{classde_1_1data_1_1_mesh}{
+\section{de\-:\-:data\-:\-:\-Mesh \-Class \-Reference}
+\label{classde_1_1data_1_1_mesh}\index{de\-::data\-::\-Mesh@{de\-::data\-::\-Mesh}}
+}
+
+
+describe a \hyperlink{classde_1_1data_1_1_mesh}{\-Mesh} in memory  
+
+
+
+
+{\ttfamily \#include $<$\-Mesh.\-h$>$}
+
+\-Inheritance diagram for de\-:\-:data\-:\-:\-Mesh\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classde_1_1data_1_1_mesh}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classde_1_1data_1_1_mesh_addb8861b2351da42135689571264ee04}{
+{\bfseries \-Mesh} (std\-::string p\-Path)}
+\label{classde_1_1data_1_1_mesh_addb8861b2351da42135689571264ee04}
+
+\item 
+\hypertarget{classde_1_1data_1_1_mesh_a3fed7c0c97c9ec90cf5492ddf004ad1f}{
+void {\bfseries release} ()}
+\label{classde_1_1data_1_1_mesh_a3fed7c0c97c9ec90cf5492ddf004ad1f}
+
+\item 
+\hypertarget{classde_1_1data_1_1_mesh_a839129c4498eeed6fec0c7a8f2fd37b7}{
+void {\bfseries set\-Vertex} (glm\-::vec3 $\ast$p\-Vertex, unsigned int p\-Nb)}
+\label{classde_1_1data_1_1_mesh_a839129c4498eeed6fec0c7a8f2fd37b7}
+
+\item 
+\hypertarget{classde_1_1data_1_1_mesh_a36ad426209872f9f20ad1dcbdc1bab5b}{
+void {\bfseries set\-U\-V} (glm\-::vec2 $\ast$p\-Uv)}
+\label{classde_1_1data_1_1_mesh_a36ad426209872f9f20ad1dcbdc1bab5b}
+
+\item 
+\hypertarget{classde_1_1data_1_1_mesh_a37d002f94e2bbc71cc429f998ea6f308}{
+void {\bfseries set\-Normal} (glm\-::vec3 $\ast$p\-Normal)}
+\label{classde_1_1data_1_1_mesh_a37d002f94e2bbc71cc429f998ea6f308}
+
+\item 
+\hypertarget{classde_1_1data_1_1_mesh_ad837f307026269a13fe7dff0ed6b4c1c}{
+void {\bfseries set\-Triangles} (int $\ast$p\-Triangles)}
+\label{classde_1_1data_1_1_mesh_ad837f307026269a13fe7dff0ed6b4c1c}
+
+\item 
+\hypertarget{classde_1_1data_1_1_mesh_a5cd5aa76a532398e63aca29042dce0e1}{
+void {\bfseries upload\-To\-V\-R\-A\-M} ()}
+\label{classde_1_1data_1_1_mesh_a5cd5aa76a532398e63aca29042dce0e1}
+
+\item 
+\hypertarget{classde_1_1data_1_1_mesh_a7b8548c48d672c9bc085ecd906498e33}{
+void {\bfseries draw} ()}
+\label{classde_1_1data_1_1_mesh_a7b8548c48d672c9bc085ecd906498e33}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classde_1_1data_1_1_mesh_aaf7d203e50bc556bdfac1e7222a9f199}{
+int {\bfseries m\-Nb\-Vertex}}
+\label{classde_1_1data_1_1_mesh_aaf7d203e50bc556bdfac1e7222a9f199}
+
+\item 
+\hypertarget{classde_1_1data_1_1_mesh_ae9dfb01b5452dadb9f6398f0b53e9f7d}{
+glm\-::vec3 $\ast$ {\bfseries m\-Vertex}}
+\label{classde_1_1data_1_1_mesh_ae9dfb01b5452dadb9f6398f0b53e9f7d}
+
+\item 
+\hypertarget{classde_1_1data_1_1_mesh_a4c6bbbf777959b963e7bfc24838e78df}{
+glm\-::vec2 $\ast$ {\bfseries m\-Uvs}}
+\label{classde_1_1data_1_1_mesh_a4c6bbbf777959b963e7bfc24838e78df}
+
+\item 
+\hypertarget{classde_1_1data_1_1_mesh_abc3e63ff9f0a159685f556aa87ce5762}{
+glm\-::vec3 $\ast$ {\bfseries m\-Normals}}
+\label{classde_1_1data_1_1_mesh_abc3e63ff9f0a159685f556aa87ce5762}
+
+\item 
+\hypertarget{classde_1_1data_1_1_mesh_a6f24ff8a3176033e6a09917a405db02d}{
+glm\-::vec3 $\ast$ {\bfseries m\-Tangents}}
+\label{classde_1_1data_1_1_mesh_a6f24ff8a3176033e6a09917a405db02d}
+
+\item 
+\hypertarget{classde_1_1data_1_1_mesh_af7522383c4508f0a82b27690fb36335d}{
+int $\ast$ {\bfseries m\-Triangles}}
+\label{classde_1_1data_1_1_mesh_af7522383c4508f0a82b27690fb36335d}
+
+\item 
+\hypertarget{classde_1_1data_1_1_mesh_ac35a2fe325686b438b09430cf827e9fe}{
+\-G\-Luint {\bfseries m\-Open\-G\-L\-I\-D} \mbox{[}4\mbox{]}}
+\label{classde_1_1data_1_1_mesh_ac35a2fe325686b438b09430cf827e9fe}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+describe a \hyperlink{classde_1_1data_1_1_mesh}{\-Mesh} in memory 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+include/data/\-Mesh.\-h\end{DoxyCompactItemize}

@@ -1,0 +1,124 @@
+\hypertarget{classde_1_1data_1_1_shader}{
+\section{de\-:\-:data\-:\-:\-Shader \-Class \-Reference}
+\label{classde_1_1data_1_1_shader}\index{de\-::data\-::\-Shader@{de\-::data\-::\-Shader}}
+}
+
+
+\-Encapsulate a shader. \-Simply allow simple loading from file.  
+
+
+
+
+{\ttfamily \#include $<$\-Shader.\-h$>$}
+
+\-Inheritance diagram for de\-:\-:data\-:\-:\-Shader\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classde_1_1data_1_1_shader}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classde_1_1data_1_1_shader_a51d5bfadf16d2268280b5ffc0ee0ca82}{\-Shader\-Type} \{ {\bfseries \-V\-E\-R\-T\-E\-X} =  \-G\-L\-\_\-\-V\-E\-R\-T\-E\-X\-\_\-\-S\-H\-A\-D\-E\-R, 
+{\bfseries \-P\-I\-X\-E\-L} =  \-G\-L\-\_\-\-F\-R\-A\-G\-M\-E\-N\-T\-\_\-\-S\-H\-A\-D\-E\-R, 
+{\bfseries \-G\-E\-O\-M\-E\-T\-R\-Y} =  \-G\-L\-\_\-\-G\-E\-O\-M\-E\-T\-R\-Y\-\_\-\-S\-H\-A\-D\-E\-R
+ \}
+\begin{DoxyCompactList}\small\item\em \-This simply redefine \-Open\-G\-L shader type (avoid to include \-Open\-G\-L stuff) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classde_1_1data_1_1_shader_a00c8bf4cd6b0444bd136abae0eb712c3}{
+\hyperlink{classde_1_1data_1_1_shader_a00c8bf4cd6b0444bd136abae0eb712c3}{\-Shader} ()}
+\label{classde_1_1data_1_1_shader_a00c8bf4cd6b0444bd136abae0eb712c3}
+
+\begin{DoxyCompactList}\small\item\em create an uninitialize shader. \-Init it with init(shadertype); \end{DoxyCompactList}\item 
+\hyperlink{classde_1_1data_1_1_shader_ab0bdd894b1d863e0cef81a1abe5cca79}{\-Shader} (\hyperlink{classde_1_1data_1_1_shader_a51d5bfadf16d2268280b5ffc0ee0ca82}{\-Shader\-Type} p\-Type)
+\begin{DoxyCompactList}\small\item\em \-Create an empty shader (need to be initialized with some code later) \end{DoxyCompactList}\item 
+\hypertarget{classde_1_1data_1_1_shader_af60195244f00992f5d5a5e87a0997bde}{
+void {\bfseries init} (\hyperlink{classde_1_1data_1_1_shader_a51d5bfadf16d2268280b5ffc0ee0ca82}{\-Shader\-Type} p\-Type)}
+\label{classde_1_1data_1_1_shader_af60195244f00992f5d5a5e87a0997bde}
+
+\item 
+\hypertarget{classde_1_1data_1_1_shader_aaeb01a7ded1439a857ba0fb15f387bb3}{
+bool {\bfseries is\-Loaded} () const }
+\label{classde_1_1data_1_1_shader_aaeb01a7ded1439a857ba0fb15f387bb3}
+
+\item 
+\hypertarget{classde_1_1data_1_1_shader_ada143dca593f3d0f094f6fb873d70229}{
+\-G\-Luint {\bfseries get\-I\-D} () const }
+\label{classde_1_1data_1_1_shader_ada143dca593f3d0f094f6fb873d70229}
+
+\item 
+\hypertarget{classde_1_1data_1_1_shader_ab23e02915a3b10549dc50333147d4065}{
+bool {\bfseries load\-Shader} (std\-::string p\-Code)}
+\label{classde_1_1data_1_1_shader_ab23e02915a3b10549dc50333147d4065}
+
+\item 
+\hypertarget{classde_1_1data_1_1_shader_aca7bf7b50373c95750c53e3c4a5b4985}{
+bool {\bfseries load\-Shader\-From\-File} (std\-::string p\-Path)}
+\label{classde_1_1data_1_1_shader_aca7bf7b50373c95750c53e3c4a5b4985}
+
+\item 
+\hypertarget{classde_1_1data_1_1_shader_a0aa3bd18b99a59922dde3ed539d70719}{
+std\-::string {\bfseries get\-Shader\-Log} ()}
+\label{classde_1_1data_1_1_shader_a0aa3bd18b99a59922dde3ed539d70719}
+
+\item 
+\hypertarget{classde_1_1data_1_1_shader_a87def2b6856bbdafa39133cd9cfeb84a}{
+void {\bfseries release} ()}
+\label{classde_1_1data_1_1_shader_a87def2b6856bbdafa39133cd9cfeb84a}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classde_1_1data_1_1_shader_a2622c4d3beeaa142cfddbbea08da5567}{
+\-G\-Luint {\bfseries m\-Shader\-I\-D}}
+\label{classde_1_1data_1_1_shader_a2622c4d3beeaa142cfddbbea08da5567}
+
+\item 
+\hypertarget{classde_1_1data_1_1_shader_a11d7c64ba107f21279fc868ebf4277c3}{
+bool {\bfseries m\-Is\-Loaded}}
+\label{classde_1_1data_1_1_shader_a11d7c64ba107f21279fc868ebf4277c3}
+
+\item 
+\hypertarget{classde_1_1data_1_1_shader_a31b88cfe272c86cc17b49db1025aea8b}{
+int {\bfseries m\-Type}}
+\label{classde_1_1data_1_1_shader_a31b88cfe272c86cc17b49db1025aea8b}
+
+\item 
+\hypertarget{classde_1_1data_1_1_shader_a7b9400f1726f29f0be7edabde69bd611}{
+std\-::string {\bfseries m\-Error\-Log}}
+\label{classde_1_1data_1_1_shader_a7b9400f1726f29f0be7edabde69bd611}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Encapsulate a shader. \-Simply allow simple loading from file. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classde_1_1data_1_1_shader_ab0bdd894b1d863e0cef81a1abe5cca79}{
+\index{de\-::data\-::\-Shader@{de\-::data\-::\-Shader}!\-Shader@{\-Shader}}
+\index{\-Shader@{\-Shader}!de::data::Shader@{de\-::data\-::\-Shader}}
+\subsubsection[{\-Shader}]{\setlength{\rightskip}{0pt plus 5cm}de\-::data\-::\-Shader\-::\-Shader (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Shader\-Type}}]{p\-Type}
+\end{DoxyParamCaption}
+)}}
+\label{classde_1_1data_1_1_shader_ab0bdd894b1d863e0cef81a1abe5cca79}
+
+
+\-Create an empty shader (need to be initialized with some code later) 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em p\-Type} & can be fed an \-Open\-G\-L enum, as \-Shader\-Type is only a redefinition of those. \\
+\hline
+\end{DoxyParams}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+include/data/\-Shader.\-h\end{DoxyCompactItemize}

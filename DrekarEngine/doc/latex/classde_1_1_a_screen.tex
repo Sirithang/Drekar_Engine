@@ -1,0 +1,39 @@
+\hypertarget{classde_1_1_a_screen}{
+\section{de\-:\-:\-A\-Screen \-Class \-Reference}
+\label{classde_1_1_a_screen}\index{de\-::\-A\-Screen@{de\-::\-A\-Screen}}
+}
+
+
+\-This class define a screen. \-Subclass this to define the screens needed for your game. \-A screen is composed of a tree of object (the scene), and a \-G\-U\-I \-Layer. \-Screen are pushed into the screen pile of the \hyperlink{classde_1_1_engine}{\-Engine}. the engine always render/update the screen at the top of the pile.  
+
+
+
+
+{\ttfamily \#include $<$\-A\-Screen.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classde_1_1_a_screen_a28b840683b1ca50d0c983eb0456fe0e3}{
+virtual void {\bfseries init} ()}
+\label{classde_1_1_a_screen_a28b840683b1ca50d0c983eb0456fe0e3}
+
+\item 
+\hypertarget{classde_1_1_a_screen_a705a669f2e391475a5237d530cca09c8}{
+virtual void \hyperlink{classde_1_1_a_screen_a705a669f2e391475a5237d530cca09c8}{update} ()}
+\label{classde_1_1_a_screen_a705a669f2e391475a5237d530cca09c8}
+
+\begin{DoxyCompactList}\small\item\em you \-H\-A\-V\-E to call this base class update in your sublcass, to allow updating of the internal of the engine \end{DoxyCompactList}\item 
+\hypertarget{classde_1_1_a_screen_ad4e30171aeab1824fb60958cfa18ca8b}{
+virtual void \hyperlink{classde_1_1_a_screen_ad4e30171aeab1824fb60958cfa18ca8b}{draw} ()}
+\label{classde_1_1_a_screen_ad4e30171aeab1824fb60958cfa18ca8b}
+
+\begin{DoxyCompactList}\small\item\em you \-H\-A\-V\-E to call this base class draw in your subclass, to allow drawing the scene tree. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-This class define a screen. \-Subclass this to define the screens needed for your game. \-A screen is composed of a tree of object (the scene), and a \-G\-U\-I \-Layer. \-Screen are pushed into the screen pile of the \hyperlink{classde_1_1_engine}{\-Engine}. the engine always render/update the screen at the top of the pile. 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+include/core/\-A\-Screen.\-h\end{DoxyCompactItemize}

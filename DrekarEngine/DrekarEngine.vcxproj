@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{4FF2B78C-C836-48F4-9231-F4985363CC9A}</ProjectGuid>
+    <RootNamespace>DrekarEngine</RootNamespace>
+    <VCTargetsPath Condition="'$(VCTargetsPath11)' != '' and '$(VSVersion)' == '' and $(VisualStudioVersion) == ''">$(VCTargetsPath11)</VCTargetsPath>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)bin\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IntDir>temp\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)-d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$bin\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IntDir>temp\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>./include;./ext/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DE_EXPORT_DEFINE;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/wd4251 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+      <AdditionalLibraryDirectories>./ext/lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;GLFW.lib;glew32s.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(OutDir)..\..\DrekarTest\bin\$(TargetName)$(TargetExt) &amp;&amp; copy $(OutDir)$(TargetName).lib $(OutDir)..\..\DrekarTest\ext\lib\$(TargetName).lib</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>./include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\component\Camera.cpp" />
+    <ClCompile Include="src\component\light\DirectionalLight.cpp" />
+    <ClCompile Include="src\component\light\Light.cpp" />
+    <ClCompile Include="src\component\light\PointLight.cpp" />
+    <ClCompile Include="src\component\MeshRenderer.cpp" />
+    <ClCompile Include="src\component\Transform.cpp" />
+    <ClCompile Include="src\core\AScreen.cpp" />
+    <ClCompile Include="src\core\Debug.cpp" />
+    <ClCompile Include="src\core\Engine.cpp" />
+    <ClCompile Include=".\src\data\Mesh.cpp" />
+    <ClCompile Include="src\core\Gameobject.cpp" />
+    <ClCompile Include="src\core\GameTime.cpp" />
+    <ClCompile Include="src\core\Helpers.cpp" />
+    <ClCompile Include="src\core\Material.cpp" />
+    <ClCompile Include="src\core\Program.cpp" />
+    <ClCompile Include=".\src\core\AComponent.cpp" />
+    <ClCompile Include="src\core\RenderBuffer.cpp" />
+    <ClCompile Include="src\data\Shader.cpp" />
+    <ClCompile Include="src\data\Texture.cpp" />
+    <ClCompile Include="src\renderer\Renderer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\component\Camera.h" />
+    <ClInclude Include="include\component\light\DirectionalLight.h" />
+    <ClInclude Include="include\component\light\Light.h" />
+    <ClInclude Include="include\component\light\PointLight.h" />
+    <ClInclude Include="include\component\MeshRenderer.h" />
+    <ClInclude Include="include\component\Transform.h" />
+    <ClInclude Include=".\include\core\AComponent.h" />
+    <ClInclude Include="include\core\Debug.h" />
+    <ClInclude Include="include\core\Engine.h" />
+    <ClInclude Include=".\include\core\CountedObject.h" />
+    <ClInclude Include=".\include\core\AScreen.h" />
+    <ClInclude Include="include\core\Gameobject.h" />
+    <ClInclude Include="include\core\GameTime.h" />
+    <ClInclude Include="include\core\Helpers.h" />
+    <ClInclude Include="include\core\Material.h" />
+    <ClInclude Include="include\core\Program.h" />
+    <ClInclude Include="include\core\RenderBuffer.h" />
+    <ClInclude Include="include\data\Mesh.h" />
+    <ClInclude Include="include\data\Shader.h" />
+    <ClInclude Include="include\data\Texture.h" />
+    <ClInclude Include="include\export.h" />
+    <ClInclude Include="include\internal\InternalData.h" />
+    <ClInclude Include="include\renderer\Renderer.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

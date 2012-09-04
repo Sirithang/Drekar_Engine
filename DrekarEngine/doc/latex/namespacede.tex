@@ -1,0 +1,30 @@
+\hypertarget{namespacede}{
+\section{de \-Namespace \-Reference}
+\label{namespacede}\index{de@{de}}
+}
+
+
+the namespace of the engine  
+
+
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classde_1_1_a_component}{\-A\-Component}
+\item 
+class \hyperlink{classde_1_1_a_screen}{\-A\-Screen}
+\begin{DoxyCompactList}\small\item\em \-This class define a screen. \-Subclass this to define the screens needed for your game. \-A screen is composed of a tree of object (the scene), and a \-G\-U\-I \-Layer. \-Screen are pushed into the screen pile of the \hyperlink{classde_1_1_engine}{\-Engine}. the engine always render/update the screen at the top of the pile. \end{DoxyCompactList}\item 
+class \hyperlink{classde_1_1_counted_object}{\-Counted\-Object}
+\begin{DoxyCompactList}\small\item\em this class is the base class allowing to count object. \-It take car of tracking the copy, and release the object once not referenced by nothing \-The child class must implement a public \char`\"{}release()\char`\"{} function that must clean the object (instead of the destructor) \-N\-O\-T\-E \-: the object is deleted each time, only the function release is called once the count reach zero. \end{DoxyCompactList}\item 
+class \hyperlink{classde_1_1_debug}{\-Debug}
+\item 
+class \hyperlink{classde_1_1_engine}{\-Engine}
+\begin{DoxyCompactList}\small\item\em \-Main class driving the \hyperlink{classde_1_1_engine}{\-Engine}. \end{DoxyCompactList}\item 
+class \hyperlink{classde_1_1_game_object}{\-Game\-Object}
+\item 
+class \hyperlink{classde_1_1_program}{\-Program}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+the namespace of the engine 

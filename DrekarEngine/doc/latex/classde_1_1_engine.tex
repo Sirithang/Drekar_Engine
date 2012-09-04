@@ -1,0 +1,108 @@
+\hypertarget{classde_1_1_engine}{
+\section{de\-:\-:\-Engine \-Class \-Reference}
+\label{classde_1_1_engine}\index{de\-::\-Engine@{de\-::\-Engine}}
+}
+
+
+\-Main class driving the \hyperlink{classde_1_1_engine}{\-Engine}.  
+
+
+
+
+{\ttfamily \#include $<$\-Engine.\-h$>$}
+
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classde_1_1_engine_ac4c2011633fe02a8d501b4a44c24d9c6}{
+static void {\bfseries initialize} (int p\-Width=800, int p\-Height=600, bool p\-Fullscreen=false)}
+\label{classde_1_1_engine_ac4c2011633fe02a8d501b4a44c24d9c6}
+
+\item 
+\hypertarget{classde_1_1_engine_afe7222c75b761a87e97755b25012a155}{
+static void {\bfseries loop} ()}
+\label{classde_1_1_engine_afe7222c75b761a87e97755b25012a155}
+
+\item 
+\hypertarget{classde_1_1_engine_a560c70eb0a07fc209672ebd0be8b3bc6}{
+static void \hyperlink{classde_1_1_engine_a560c70eb0a07fc209672ebd0be8b3bc6}{push\-Screen} (\hyperlink{classde_1_1_a_screen}{\-A\-Screen} $\ast$p\-Screen)}
+\label{classde_1_1_engine_a560c70eb0a07fc209672ebd0be8b3bc6}
+
+\begin{DoxyCompactList}\small\item\em push a screen on the pile, it became the new updated/rendered screen \end{DoxyCompactList}\item 
+\hypertarget{classde_1_1_engine_a52230fb1aedeef894a1e5adfe0923d57}{
+static \hyperlink{classde_1_1_a_screen}{\-A\-Screen} $\ast$ \hyperlink{classde_1_1_engine_a52230fb1aedeef894a1e5adfe0923d57}{pop\-Screen} ()}
+\label{classde_1_1_engine_a52230fb1aedeef894a1e5adfe0923d57}
+
+\begin{DoxyCompactList}\small\item\em pop the screen from the pile and return it. if you wish to delete the screen pass true as argument, this will flag the screen for deletion. \-Avoid deleting the screen right away, especialy if it's the current main screen... \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classde_1_1_engine_a9263c32f13aa37f5cc5d747b21b3c891}{
+{\bfseries \-Engine} (int p\-Width, int p\-Height, bool p\-Fullscreen)}
+\label{classde_1_1_engine_a9263c32f13aa37f5cc5d747b21b3c891}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classde_1_1_engine_abaf67500a242fdcbe850d0c45ee30636}{
+int {\bfseries m\-Width}}
+\label{classde_1_1_engine_abaf67500a242fdcbe850d0c45ee30636}
+
+\item 
+\hypertarget{classde_1_1_engine_a9fe6e8f5b32ed72b76e1194bab99feb1}{
+int {\bfseries m\-Height}}
+\label{classde_1_1_engine_a9fe6e8f5b32ed72b76e1194bab99feb1}
+
+\item 
+\hypertarget{classde_1_1_engine_a335a0392ce9cfc6ce5625ea991d4849d}{
+bool {\bfseries m\-Fullscreen}}
+\label{classde_1_1_engine_a335a0392ce9cfc6ce5625ea991d4849d}
+
+\item 
+\hypertarget{classde_1_1_engine_ac9af7310cc233aa5dd2149e7f6dfe6c6}{
+bool {\bfseries m\-Running}}
+\label{classde_1_1_engine_ac9af7310cc233aa5dd2149e7f6dfe6c6}
+
+\item 
+\hypertarget{classde_1_1_engine_af81f599248b3a98783e4250b57f180b9}{
+std\-::list$<$ \hyperlink{classde_1_1_a_screen}{\-A\-Screen} $\ast$ $>$ {\bfseries m\-Screens}}
+\label{classde_1_1_engine_af81f599248b3a98783e4250b57f180b9}
+
+\item 
+\hypertarget{classde_1_1_engine_a328645ef9103750ac2bc24b4ddd7963c}{
+std\-::list$<$ \hyperlink{classde_1_1_a_screen}{\-A\-Screen} $\ast$ $>$ {\bfseries m\-Init\-Screens}}
+\label{classde_1_1_engine_a328645ef9103750ac2bc24b4ddd7963c}
+
+\item 
+\hypertarget{classde_1_1_engine_a9629a734c18b2d077c42df1398090735}{
+std\-::list$<$ \hyperlink{classde_1_1_a_screen}{\-A\-Screen} $\ast$ $>$ {\bfseries m\-Delete\-Screens}}
+\label{classde_1_1_engine_a9629a734c18b2d077c42df1398090735}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classde_1_1_engine_a582339f67689e2e5f799f37017454282}{
+static \hyperlink{classde_1_1_engine}{\-Engine} $\ast$ {\bfseries s\-Instance}}
+\label{classde_1_1_engine_a582339f67689e2e5f799f37017454282}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Main class driving the \hyperlink{classde_1_1_engine}{\-Engine}. 
+
+\-This class cannot be instantiated. \-Instead initialize should be used. \-All the interface is throught static method, a simple use would be
+
+
+\begin{DoxyCode}
+     Engine::initialize(800, 600, false);
+     Engine::loop();//launch the rendering loop, that will call update/draw on
+       all screens
+\end{DoxyCode}
+ 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+include/core/\-Engine.\-h\end{DoxyCompactItemize}
