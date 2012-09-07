@@ -39,11 +39,11 @@ void MyScreen::init()
 	//--------------------- ADD A LIGHTS
 	
 	de::GameObject* lLight = new de::GameObject();
-	/*de::component::DirectionalLight* lcomplight = (de::component::DirectionalLight*)lLight->addComponent(new de::component::DirectionalLight());
-	lLight->transform()->setRotation(glm::quat(glm::vec3( -45 * 3.14f * 180.0f, -45 * 3.14f * 180.0f,0)));
-	lLight->transform()->setRotation(glm::quat(glm::vec3(0, 45 * 3.14f * 180.0f, 0)));
+	de::component::DirectionalLight* lcomplight = (de::component::DirectionalLight*)lLight->addComponent(new de::component::DirectionalLight());
+	//lLight->transform()->setRotation(glm::quat(glm::vec3( -45 * 3.14f * 180.0f, -45 * 3.14f * 180.0f,0)));
+	lLight->transform()->setRotation(glm::quat(glm::vec3(glm::radians(80.0f), 0, 0)));
 
-	lcomplight->setColor(glm::vec3(0.8,0.5,0.4));*/
+	lcomplight->setColor(glm::vec3(0.8,0.5,0.4));
 
 	//------------------ Second Mesh
 
@@ -62,11 +62,11 @@ void MyScreen::init()
 	//mRoot.addChild(lLight);
 
 
-    lLight = new de::GameObject();
+    /*lLight = new de::GameObject();
 	de::component::PointLight* lpts = (de::component::PointLight*)lLight->addComponent(new de::component::PointLight());
 	//lLight->transform()->setRotation(glm::quat(glm::vec3(0, -45 * 3.14f * 180.0f, 0)));
-	lLight->transform()->setPosition(glm::vec3(0, 10,0));
-	lpts->setColor(glm::vec3(0,0,1));
+	lLight->transform()->setPosition(glm::vec3(0,20,0));
+	lpts->setColor(glm::vec3(0,0,1));*/
 
 	//-------------------
 

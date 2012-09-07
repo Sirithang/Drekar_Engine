@@ -10,7 +10,7 @@ using namespace de::component;
 
 void PointLight::init()
 {
-	mRange = 10.0f;
+	mRange = 20.0f;
 	de::renderer::Renderer::current()->addPointLight(this);
 }
 
@@ -20,7 +20,7 @@ void PointLight::setup(Program* pProg)
 {
 	Light::setup(pProg);
 
-	glm::vec4 viewPos = glm::vec4(0,0,0,1.0f) * mOwner->transform()->matrix() * Camera::current()->viewMatrix() ;
+	glm::vec4 viewPos = Camera::current()->viewMatrix() * mOwner->transform()->matrix() * glm::vec4(0,0,0,1) ;
 
 	viewPos.x /= viewPos.w;
 	viewPos.y /= viewPos.w;
