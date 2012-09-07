@@ -19,7 +19,7 @@ void DirectionalLight::setup(Program* pProg)
 {
 	Light::setup(pProg);
 
-	glm::mat4 toView = glm::transpose(glm::inverse((Camera::current()->viewMatrix()*mOwner->transform()->matrix())));
+	glm::mat4 toView = glm::transpose(glm::inverse((Camera::current()->viewMatrix())));
 
 	glm::vec4 viewLightDirection = toView * glm::vec4(mOwner->transform()->forward(), 0.0f);
 

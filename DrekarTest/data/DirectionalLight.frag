@@ -24,7 +24,6 @@ void main()
 	 vec4 position;
 	 position.x = texcoord.x * 2.0f - 1.0f;
 	 position.y = texcoord.y * 2.0f - 1.0f;
-	 //position.y *= -1;
 	 position.z = depth;
 	 position.w = 1.0f;
 

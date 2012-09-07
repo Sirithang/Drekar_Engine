@@ -20,7 +20,7 @@ void PointLight::setup(Program* pProg)
 {
 	Light::setup(pProg);
 
-	glm::vec4 viewPos = Camera::current()->viewMatrix() * mOwner->transform()->matrix() * glm::vec4(0,0,0,1) ;
+	glm::vec4 viewPos = Camera::current()->viewMatrix() * glm::vec4(mOwner->transform()->position(), 1.0f);// * glm::vec4(0,0,0,1) ;
 
 	viewPos.x /= viewPos.w;
 	viewPos.y /= viewPos.w;

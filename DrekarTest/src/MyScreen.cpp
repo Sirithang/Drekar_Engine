@@ -4,10 +4,14 @@
 #include "core/Material.h"
 #include "core/GameTime.h"
 
+#include <time.h>
+
 #include <gl/glew.h>
 
 void MyScreen::init()
 {
+	srand(time(NULL));
+
 	lFirst.init(de::data::Shader::VERTEX);
 	lSecond.init(de::data::Shader::PIXEL);
 	lFirst.loadShaderFromFile("data/vertex.vert");
@@ -39,12 +43,12 @@ void MyScreen::init()
 	//--------------------- ADD A LIGHTS
 	
 	de::GameObject* lLight = new de::GameObject();
-	de::component::DirectionalLight* lcomplight = (de::component::DirectionalLight*)lLight->addComponent(new de::component::DirectionalLight());
-	//lLight->transform()->setRotation(glm::quat(glm::vec3( -45 * 3.14f * 180.0f, -45 * 3.14f * 180.0f,0)));
-	lLight->transform()->setRotation(glm::quat(glm::vec3(glm::radians(80.0f), 0, 0)));
+	/*de::component::DirectionalLight* lcomplight = (de::component::DirectionalLight*)lLight->addComponent(new de::component::DirectionalLight());
+	lLight->transform()->setRotation(glm::quat(glm::vec3( -45 * 3.14f * 180.0f, -45 * 3.14f * 180.0f,0)));
+	lLight->transform()->setRotation(glm::quat(glm::vec3(glm::radians(45.0f), glm::radians(45.0f), 0)));
 
 	lcomplight->setColor(glm::vec3(0.8,0.5,0.4));
-
+	*/
 	//------------------ Second Mesh
 
 	/*de::component::MeshRenderer*	lMeshRenderer	= (de::component::MeshRenderer*)lObj2.addComponent(new de::component::MeshRenderer());
@@ -62,17 +66,22 @@ void MyScreen::init()
 	//mRoot.addChild(lLight);
 
 
-    /*lLight = new de::GameObject();
-	de::component::PointLight* lpts = (de::component::PointLight*)lLight->addComponent(new de::component::PointLight());
-	//lLight->transform()->setRotation(glm::quat(glm::vec3(0, -45 * 3.14f * 180.0f, 0)));
-	lLight->transform()->setPosition(glm::vec3(0,20,0));
-	lpts->setColor(glm::vec3(0,0,1));*/
+	for(int i = 0; i < 2; i++)
+	{
+		lLight = new de::GameObject();
+		de::component::PointLight* lpts = (de::component::PointLight*)lLight->addComponent(new de::component::PointLight());
+		//lLight->transform()->setRotation(glm::quat(glm::vec3(0, -45 * 3.14f * 180.0f, 0)));
+		lLight->transform()->setPosition(glm::vec3(rand()%20 - 10,rand()%20 - 10,rand()%20 - 10));
+		lpts->setColor(glm::vec3(rand()%100 * 0.01f,rand()%100 * 0.01f,rand()%100 * 0.01f));
+
+		mRoot.addChild(lLight);
+	}
 
 	//-------------------
 
 	mRoot.addChild(&lObj);
 	mRoot.addChild(lCamObj);
-	mRoot.addChild(lLight);
+	
 	mRoot.addChild(&lObj2);
 
 	lAngle = 0;

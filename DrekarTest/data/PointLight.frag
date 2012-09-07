@@ -25,9 +25,8 @@ void main()
 
 
 	 vec4 position;
-	 position.x = texcoord.x;
-	 position.y = texcoord.y;
-	 //position.y *= -1;
+	 position.x = texcoord.x/texcoord.w;
+	 position.y = texcoord.y/texcoord.w;
 	 position.z = depth;
 	 position.w = 1.0f;
 
@@ -40,7 +39,7 @@ void main()
 	 vec3 reflectionVector = normalize(reflect(-nLightDir, normal.xyz)).xyz;
 	 vec3 pixelToCam = normalize(-position.xyz);
 
-	 float attenuation = clamp(1.0 - length(lightDir)/_Radius, 1.0, 1.0); 
+	 float attenuation = clamp(1.0 - length(lightDir)/_Radius, 0.0, 1.0); 
 	 float spec =  specIntensity * pow( clamp(dot(reflectionVector, pixelToCam), 0.0, 1.0), normal.w);
 
 	 outputColor = attenuation * vec4(_LightColor.xyz * max(0.0, dot(unpacked, nLightDir.xyz)), spec);
