@@ -19,7 +19,7 @@ Mesh::Mesh()
 
 //--------------------------------
 
-void Mesh::release()
+Mesh::~Mesh()
 {
 	glDeleteBuffers(5, mOpenGLID);
 }

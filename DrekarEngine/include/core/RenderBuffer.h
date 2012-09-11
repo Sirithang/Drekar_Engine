@@ -10,7 +10,7 @@
 
 namespace de
 {
-	class DE_EXPORT RenderBuffer : CountedObject<RenderBuffer>
+	class DE_EXPORT RenderBuffer
 	{
 	protected:
 		unsigned int mWidth;
@@ -20,20 +20,20 @@ namespace de
 
 		int			mCurrentAttachementMax;
 
-		std::list<data::Texture> mTextures;
+		std::list<data::Texture*> mTextures;
 
 	public:
 		RenderBuffer();
+		~RenderBuffer();
 
-		void release();
 		void init(unsigned int pWidth, unsigned int pHeight);
 
-		void addTexture(const data::Texture& pTexture);
+		void addTexture(data::Texture* pTexture);
 
 		void bind()		const;
 		void unbind()	const;
 
-		const std::list<data::Texture>& getTextures() const;
+		const std::list<data::Texture*>& getTextures() const;
 	};
 }
 

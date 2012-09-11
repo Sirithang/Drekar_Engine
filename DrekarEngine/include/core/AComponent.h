@@ -2,20 +2,18 @@
 #define DE_COMPONENT_H
 
 #include "export.h"
-#include "CountedObject.h"
 
 namespace de
 {
 	class GameObject;
 
-	class DE_EXPORT AComponent : public CountedObject<AComponent>
+	class DE_EXPORT AComponent
 	{
 	protected:
 		GameObject* mOwner;
 
 	public:
 		AComponent();
-
 
 		//-------------------------
 
@@ -42,8 +40,6 @@ namespace de
 		* \brief Only called if this component was added to the current renderer ( Renderer::current() )
 		*/
 		virtual void render();
-
-		void release();
 
 		friend class GameObject;
 	};

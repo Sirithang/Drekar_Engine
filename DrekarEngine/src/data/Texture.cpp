@@ -8,6 +8,13 @@ Texture::Texture()
 
 //------------------------------
 
+Texture::~Texture()
+{
+	glDeleteTextures(1, &mID);
+}
+
+//------------------------------
+
 void Texture::create(unsigned int pWidth, unsigned int pHeight, GLint pInternalFormat, GLint pFormat, GLint pDataFormat)
 {
 	glGenTextures(1, &mID);
@@ -21,11 +28,6 @@ void Texture::create(unsigned int pWidth, unsigned int pHeight, GLint pInternalF
 	//--- by default we set nearest filtering, to accomodate easily with RT
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-}
-
-void Texture::release()
-{
-	glDeleteTextures(1, &mID);
 }
 
 //------------------------------

@@ -13,7 +13,7 @@ Program::Program()
 
 //--------------------
 
-void Program::release()
+Program::~Program()
 {
 	glDeleteProgram(mID);
 }

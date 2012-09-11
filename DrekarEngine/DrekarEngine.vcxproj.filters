@@ -128,9 +128,6 @@
     <ClInclude Include="include\core\Program.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include=".\include\core\CountedObject.h">
-      <Filter>Header Files\core</Filter>
-    </ClInclude>
     <ClInclude Include=".\include\core\AScreen.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>

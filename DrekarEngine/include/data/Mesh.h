@@ -23,7 +23,7 @@ namespace de
 
 			\brief describe a Mesh in memory
 		 */
-		class DE_EXPORT Mesh : public CountedObject<Mesh>
+		class DE_EXPORT Mesh
 		{
 		protected:
 
@@ -54,7 +54,7 @@ namespace de
 			Mesh();
 			Mesh(std::string pPath);
 
-			void release();
+			~Mesh();
 
 			void loadFromFile(const std::string& pPath);
 			

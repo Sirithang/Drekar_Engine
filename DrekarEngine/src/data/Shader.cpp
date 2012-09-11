@@ -25,7 +25,7 @@ Shader::Shader(Shader::ShaderType pType)
 
 Shader::~Shader()
 {
-	
+	glDeleteShader(mShaderID);
 }
 
 //--------------------------------------
@@ -49,14 +49,6 @@ bool Shader::isLoaded() const
 GLuint Shader::getID() const
 {
 	return mShaderID;
-}
-
-//----------------------------------------
-
-void Shader::release()
-{
-	int result = glIsShader(mShaderID);
-	glDeleteShader(mShaderID);
 }
 
 //-----------------------------------------

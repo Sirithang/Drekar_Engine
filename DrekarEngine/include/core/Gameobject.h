@@ -2,7 +2,6 @@
 #define DE_GAMEOBJECT_H
 
 #include "export.h"
-#include "CountedObject.h"
 #include "AComponent.h"
 #include "component/Transform.h"
 
@@ -11,10 +10,12 @@
 
 namespace de
 {
-	class DE_EXPORT GameObject : public CountedObject<GameObject> 
+	class DE_EXPORT GameObject
 	{
 	private:
-		static std::list<GameObject*> sGameObjects; // keep track of all gameObject created and deleted. A GameObject start to be a part of the games once created
+		//Keep all GameObject Listed. A GameObject is added to this list once created. If it's made son of ny other gameObject, it's
+		//removed from the list (as it's parent will take care of updating him)
+		static std::list<GameObject*> sGameObjects;
 
 		void internalUpdate();	//this is called only by Engine, cannot be derived
 		void internalDraw();	//this is called only by Engine, cannot be derived
@@ -26,13 +27,13 @@ namespace de
 		std::list<AComponent*>	mComponents;
 		component::Transform*	mTransform; // shortcut to the component transform
 
+		std::string				mName;
 		bool					mActive;
 
 	public:
-		GameObject();
-		GameObject(std::string pName);
+		GameObject(std::string pName = "GameObject");
 
-		void release();
+		virtual ~GameObject();
 
 		/**
 		* \brief	override this to implement per-frame behavior.

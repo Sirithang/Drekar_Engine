@@ -116,7 +116,6 @@
     <ClInclude Include=".\include\core\AComponent.h" />
     <ClInclude Include="include\core\Debug.h" />
     <ClInclude Include="include\core\Engine.h" />
-    <ClInclude Include=".\include\core\CountedObject.h" />
     <ClInclude Include=".\include\core\AScreen.h" />
     <ClInclude Include="include\core\Gameobject.h" />
     <ClInclude Include="include\core\GameTime.h" />

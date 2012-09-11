@@ -23,7 +23,7 @@ namespace de
 		* \brief Encapsulate a shader. Simply allow simple loading from file
 		*
 		*/
-		class DE_EXPORT Shader : public CountedObject<Shader>
+		class DE_EXPORT Shader
 		{
 		protected:
 			GLuint		mShaderID;
@@ -68,7 +68,6 @@ namespace de
 			bool loadShaderFromFile(std::string pPath);
 
 			std::string getShaderLog();
-			void release();
 		};
 	}
 }

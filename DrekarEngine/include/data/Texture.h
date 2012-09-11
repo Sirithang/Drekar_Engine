@@ -12,7 +12,7 @@ namespace de
 		/**
 		* \brief base class for texture (Image or renderbuffer)
 		*/
-		class DE_EXPORT Texture : CountedObject<Texture>
+		class DE_EXPORT Texture
 		{
 		protected:
 			GLuint mID;
@@ -22,10 +22,9 @@ namespace de
 
 		public:
 			Texture();
+			~Texture();
 
 			virtual void create(unsigned int pWidth,unsigned int pHeight, GLint pInternalFormat, GLint pFormat, GLint pDataFormat);
-		
-			void release();
 
 			unsigned int width() const;
 			unsigned int height() const;

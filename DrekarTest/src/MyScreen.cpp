@@ -23,7 +23,7 @@ void MyScreen::init()
 	//lProg.use();
 
 	de::Material* lMat = new de::Material();
-	lMat->setProgram(lProg);
+	lMat->setProgram(&lProg);
 
 	de::component::MeshRenderer* lrenderer = (de::component::MeshRenderer*)lObj.addComponent(new de::component::MeshRenderer());
 	lrenderer->setMaterial(lMat);

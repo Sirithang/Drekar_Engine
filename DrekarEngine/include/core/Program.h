@@ -9,7 +9,7 @@
 
 namespace de
 {
-	class DE_EXPORT Program : public CountedObject<Program>
+	class DE_EXPORT Program
 	{
 	protected:
 		int			mID;
@@ -19,8 +19,7 @@ namespace de
 
 	public:
 		Program();
-
-		void release();
+		~Program();
 
 		bool addShader(const data::Shader& pShader);
 		bool compile();

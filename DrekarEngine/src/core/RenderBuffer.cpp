@@ -10,6 +10,13 @@ RenderBuffer::RenderBuffer()
 
 //----------------------------
 
+RenderBuffer::~RenderBuffer()
+{
+	glDeleteFramebuffers(1, &mID);
+}
+
+//----------------------------
+
 void RenderBuffer::init(unsigned int pWidth, unsigned int pHeight)
 {
 	mWidth = pWidth;
@@ -21,8 +28,8 @@ void RenderBuffer::init(unsigned int pWidth, unsigned int pHeight)
 
 	//-------------- we create the default buffer + depth
 
-	data::Texture lBuffer;
-	lBuffer.create(pWidth, pHeight, GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE);
+	data::Texture* lBuffer = new de::data::Texture();
+	lBuffer->create(pWidth, pHeight, GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE);
 
 	mTextures.push_back(lBuffer);
 
@@ -34,7 +41,7 @@ void RenderBuffer::init(unsigned int pWidth, unsigned int pHeight)
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthrenderbuffer);
 
 	//-------- binding
-	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, lBuffer.ID(), 0);
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, lBuffer->ID(), 0);
  
 	// Set the list of draw buffers.
 	GLenum DrawBuffers[1] = {GL_COLOR_ATTACHMENT0};
@@ -44,13 +51,6 @@ void RenderBuffer::init(unsigned int pWidth, unsigned int pHeight)
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	mCurrentAttachementMax = 0;
-}
-
-//----------------------------
-
-void RenderBuffer::release()
-{
-	glDeleteFramebuffers(1, &mID);
 }
 
 //---------------------------
@@ -69,14 +69,14 @@ void RenderBuffer::unbind() const
 
 //------------------------
 
-const std::list<data::Texture>& RenderBuffer::getTextures() const
+const std::list<data::Texture*>& RenderBuffer::getTextures() const
 {
 	return mTextures;
 }
 
 //----------------------
 
-void RenderBuffer::addTexture(const data::Texture& pTexture)
+void RenderBuffer::addTexture(data::Texture* pTexture)
 {
 	mTextures.push_back(pTexture);
 	mCurrentAttachementMax += 1;
@@ -84,7 +84,7 @@ void RenderBuffer::addTexture(const data::Texture& pTexture)
 	glBindFramebuffer(GL_FRAMEBUFFER, mID);
 
 	//-------- binding
-	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + mCurrentAttachementMax, pTexture.ID(), 0);
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + mCurrentAttachementMax, pTexture->ID(), 0);
  
 	// Set the list of draw buffers.
 	GLenum* DrawBuffers = new GLenum[mCurrentAttachementMax+1];

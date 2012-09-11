@@ -35,13 +35,6 @@ void AComponent::preDraw()
 
 }
 
-//-----------------------
-
-void AComponent::release()
-{
-	
-}
-
 //----------------------
 
 void AComponent::render()

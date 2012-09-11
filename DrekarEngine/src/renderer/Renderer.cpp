@@ -14,13 +14,13 @@ Renderer::Renderer()
 {
 	mRenderBuffer.init(de::Engine::width(), de::Engine::height());
 
-	de::data::Texture lNormalTex;
-	lNormalTex.create(de::Engine::width(), de::Engine::height(), GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE);
+	de::data::Texture* lNormalTex = new de::data::Texture();
+	lNormalTex->create(de::Engine::width(), de::Engine::height(), GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE);
 
 	mRenderBuffer.addTexture(lNormalTex);
 
-	de::data::Texture lDepthTex;
-	lDepthTex.create(de::Engine::width(), de::Engine::height(), GL_LUMINANCE32F_ARB, GL_LUMINANCE, GL_FLOAT);
+	de::data::Texture* lDepthTex  = new de::data::Texture();
+	lDepthTex->create(de::Engine::width(), de::Engine::height(), GL_LUMINANCE32F_ARB, GL_LUMINANCE, GL_FLOAT);
 
 	mRenderBuffer.addTexture(lDepthTex);
 
@@ -41,12 +41,12 @@ void Renderer::buildCombineMat()
 	de::data::Shader lGBufferFrag(de::data::Shader::PIXEL);;
 	lGBufferFrag.loadShaderFromFile("data/Combine.frag");
 
-	de::Program lGBufferProg;
-	lGBufferProg.addShader(lGBufferVert);
-	lGBufferProg.addShader(lGBufferFrag);
-	lGBufferProg.compile();
+	de::Program* lGBufferProg = new de::Program();
+	lGBufferProg->addShader(lGBufferVert);
+	lGBufferProg->addShader(lGBufferFrag);
+	lGBufferProg->compile();
 
-	std::list<data::Texture>::const_iterator lIt = mRenderBuffer.getTextures().begin();
+	std::list<data::Texture*>::const_iterator lIt = mRenderBuffer.getTextures().begin();
 
 	mCombineMaterial.setProgram(lGBufferProg);
 	mCombineMaterial.addTexture("_Albedo", (*lIt));
@@ -62,10 +62,10 @@ void Renderer::buildClearMat()
 	de::data::Shader lClearFrag(de::data::Shader::PIXEL);
 	lClearFrag.loadShader(gCleanMRTFrag);
 
-	de::Program lCleanProg;
-	lCleanProg.addShader(lClearVert);
-	lCleanProg.addShader(lClearFrag);
-	lCleanProg.compile();
+	de::Program* lCleanProg = new de::Program();
+	lCleanProg->addShader(lClearVert);
+	lCleanProg->addShader(lClearFrag);
+	lCleanProg->compile();
 
 	mClearMaterial.setProgram(lCleanProg);
 }
@@ -91,12 +91,12 @@ void Renderer::initDirectionalLights()
 	de::data::Shader lDirectionalFrag(de::data::Shader::PIXEL);;
 	lDirectionalFrag.loadShaderFromFile("data/DirectionalLight.frag");
 
-	de::Program lGBufferProg;
-	lGBufferProg.addShader(lDirectionalVert);
-	lGBufferProg.addShader(lDirectionalFrag);
-	lGBufferProg.compile();
+	de::Program* lGBufferProg = new de::Program();
+	lGBufferProg->addShader(lDirectionalVert);
+	lGBufferProg->addShader(lDirectionalFrag);
+	lGBufferProg->compile();
 
-	std::list<data::Texture>::const_iterator lIt = mRenderBuffer.getTextures().begin();
+	std::list<data::Texture*>::const_iterator lIt = mRenderBuffer.getTextures().begin();
 
 	mDiretionalLightMat.setProgram(lGBufferProg);
 	mDiretionalLightMat.addTexture("_Albedo", (*lIt));
@@ -116,12 +116,12 @@ void Renderer::initPointLights()
 	de::data::Shader lDirectionalFrag(de::data::Shader::PIXEL);;
 	lDirectionalFrag.loadShaderFromFile("data/PointLight.frag");
 
-	de::Program lGBufferProg;
-	lGBufferProg.addShader(lDirectionalVert);
-	lGBufferProg.addShader(lDirectionalFrag);
-	lGBufferProg.compile();
+	de::Program* lGBufferProg = new de::Program();
+	lGBufferProg->addShader(lDirectionalVert);
+	lGBufferProg->addShader(lDirectionalFrag);
+	lGBufferProg->compile();
 
-	std::list<data::Texture>::const_iterator lIt = mRenderBuffer.getTextures().begin();
+	std::list<data::Texture*>::const_iterator lIt = mRenderBuffer.getTextures().begin();
 
 	mPointLightsMat.setProgram(lGBufferProg);
 	mPointLightsMat.addTexture("_Albedo", (*lIt));
@@ -234,11 +234,11 @@ void Renderer::renderDirectionalLights()
 {
 	std::list<de::component::DirectionalLight*>::iterator lIt = mDirectionalLights.begin();
 	mDiretionalLightMat.setup();
-	mDiretionalLightMat.program().setMatrix("_InvertP", glm::inverse(component::Camera::current()->projectionMatrix()));
+	mDiretionalLightMat.program()->setMatrix("_InvertP", glm::inverse(component::Camera::current()->projectionMatrix()));
 
 	while(lIt != mDirectionalLights.end())
 	{
-		(*lIt)->setup(&mDiretionalLightMat.program());
+		(*lIt)->setup(mDiretionalLightMat.program());
 
 		Helpers::drawQuad();
 
@@ -252,13 +252,13 @@ void Renderer::renderPointLights()
 {
 	std::list<de::component::PointLight*>::iterator lIt = mPointLights.begin();
 	mPointLightsMat.setup();
-	mPointLightsMat.program().setMatrix("_InvertP", glm::inverse(component::Camera::current()->projectionMatrix()));
-	mPointLightsMat.program().setMatrix("MATRIX_P", component::Camera::current()->projectionMatrix());
-	mPointLightsMat.program().setMatrix("MATRIX_V", component::Camera::current()->viewMatrix());
+	mPointLightsMat.program()->setMatrix("_InvertP", glm::inverse(component::Camera::current()->projectionMatrix()));
+	mPointLightsMat.program()->setMatrix("MATRIX_P", component::Camera::current()->projectionMatrix());
+	mPointLightsMat.program()->setMatrix("MATRIX_V", component::Camera::current()->viewMatrix());
 
 	while(lIt != mPointLights.end())
 	{
-		(*lIt)->setup(&mPointLightsMat.program());
+		(*lIt)->setup(mPointLightsMat.program());
 
 		mPointLightsMesh.draw();
 

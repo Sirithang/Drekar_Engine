@@ -19,18 +19,18 @@ namespace de
 	protected:
 		std::list<int>	mFreeUnit; // count free texture unit
 		
-		Program mProgram;
+		Program* mProgram;
 
 		std::map<std::string, argv::AShaderArg*> mArguments; // list of all user defined argument to pass to shader
 
-		std::list<data::Texture> mTexture;
+		std::list<data::Texture*> mTexture;
 
 	public:
 		
-		void setProgram(Program pProgram);
-		void addTexture(const std::string& pName, const data::Texture& pTexture); 
+		void setProgram(Program* pProgram);
+		void addTexture(const std::string& pName, data::Texture* pTexture); 
 
-		Program program() const;
+		Program* program() const;
 
 		/**
 		* \brief this setup the material (bind program, push texture to it etc...
@@ -83,11 +83,11 @@ namespace de
 		class TextureArg : public AShaderArg
 		{
 		protected:
-			data::Texture	mTexture;
+			data::Texture*	mTexture;
 			int				mData;
 
 		public:
-			TextureArg(const std::string& pName, int pTextureUnit, const data::Texture& pTexture);
+			TextureArg(const std::string& pName, int pTextureUnit, data::Texture* pTexture);
 			void upload(Program* pProgram);
 		};
 

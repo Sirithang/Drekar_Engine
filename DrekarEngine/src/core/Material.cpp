@@ -2,7 +2,7 @@
 
 using namespace de;
 
-Program Material::program() const
+Program* Material::program() const
 {
 	return mProgram;
 }
@@ -11,19 +11,19 @@ Program Material::program() const
 
 void Material::setup()
 {
-	mProgram.use();
+	mProgram->use();
 
 	std::map<std::string, argv::AShaderArg*>::iterator lIt = mArguments.begin();
 	while(lIt != mArguments.end())
 	{
-		(*lIt).second->upload(&mProgram);
+		(*lIt).second->upload(mProgram);
 		lIt++;
 	}
 }
 
 //---------------------
 
-void Material::setProgram(Program pProgram)
+void Material::setProgram(Program* pProgram)
 {
 	mProgram = pProgram;
 
@@ -36,7 +36,7 @@ void Material::setProgram(Program pProgram)
 
 //---------------------
 
-void Material::addTexture(const std::string& pName, const data::Texture& pTexture)
+void Material::addTexture(const std::string& pName, data::Texture* pTexture)
 {
 	mTexture.push_back(pTexture);
 
@@ -82,7 +82,7 @@ void argv::MatrixArg::upload(Program* pProgram)
 
 //---------------------------------
 
-argv::TextureArg::TextureArg(const std::string& pName, int pTextureUnit, const data::Texture& pTexture)
+argv::TextureArg::TextureArg(const std::string& pName, int pTextureUnit, data::Texture* pTexture)
 	:AShaderArg(pName)
 {
 	mData = pTextureUnit;
@@ -91,7 +91,7 @@ argv::TextureArg::TextureArg(const std::string& pName, int pTextureUnit, const d
 
 void argv::TextureArg::upload(Program* pProgram)
 {
-	mTexture.bind(mData);
+	mTexture->bind(mData);
 	pProgram->setInt(mName, mData);
 }
 

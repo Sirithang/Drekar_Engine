@@ -4,21 +4,25 @@ using namespace de;
 
 std::list<GameObject*> GameObject::sGameObjects;
 
-GameObject::GameObject()
+GameObject::GameObject(std::string pName)
 {
+	mName = pName;
+
 	mTransform = new component::Transform();
 	addComponent(mTransform);
 
 	sGameObjects.push_back(this);
 }
 
+//-----------------------------------------
 
-void GameObject::release()
+
+GameObject::~GameObject()
 {
 	std::list<GameObject*>::iterator lChild = mChildren.begin();
 	while(lChild != mChildren.end())
 	{
-		(*lChild)->release();
+		delete (*lChild);
 		lChild++;
 	}
 
