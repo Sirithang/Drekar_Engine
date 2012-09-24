@@ -3,6 +3,7 @@
 
 #include "core/AComponent.h"
 #include "core/Material.h"
+#include "core/ComponentFactory.h"
 #include "data/Mesh.h"
 
 namespace de
@@ -13,13 +14,17 @@ namespace de
 		{
 		protected:
 			Material*	mMaterial;
-			data::Mesh	mMesh;
+			data::Mesh*	mMesh;
+
+			COMPONENT_DEC_TYPE(MeshRenderer);
 
 		public:
 			void render();
 			void init();
 
-			void setMesh(data::Mesh& pMesh);
+			void fromJSON(const std::string& pData);
+
+			void setMesh(data::Mesh* pMesh);
 			void setMaterial(Material* pMaterial);
 		};
 	}

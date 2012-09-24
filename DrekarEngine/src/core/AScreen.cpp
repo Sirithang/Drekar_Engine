@@ -15,6 +15,14 @@ void AScreen::init()
 
 void AScreen::update()
 {
+	std::list<GameObject*>::iterator lIt = GameObject::sGameObjects.begin();
+
+	while(lIt != GameObject::sGameObjects.end())
+	{
+		(*lIt)->update();
+		
+		lIt++;
+	}
 }
 
 //---------------------
@@ -27,15 +35,20 @@ void AScreen::draw()
 
 void AScreen::internalUpdate()
 {
-	mRoot.update();
-	mRoot.internalUpdate();
+	std::list<GameObject*>::iterator lIt = GameObject::sGameObjects.begin();
+
+	while(lIt != GameObject::sGameObjects.end())
+	{
+		(*lIt)->internalUpdate();
+		lIt++;
+	}
+	
 }
 
 //---------------------
 
 void AScreen::internalDraw()
 {
-	mRoot.draw();
 
 	const std::list<Camera*> lCamList = Camera::cameraList();
 
@@ -44,8 +57,6 @@ void AScreen::internalDraw()
 	while(lIt != lCamList.end())
 	{
 		(*lIt)->setup();
-
-		mRoot.internalDraw();
 
 		lIt++;
 	}

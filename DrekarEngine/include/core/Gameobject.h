@@ -21,9 +21,6 @@ namespace de
 		void internalDraw();	//this is called only by Engine, cannot be derived
 
 	protected:
-		GameObject*				mParent;
-		std::list<GameObject*>	mChildren;
-
 		std::list<AComponent*>	mComponents;
 		component::Transform*	mTransform; // shortcut to the component transform
 
@@ -51,13 +48,14 @@ namespace de
 		*/
 		virtual void draw();
 
+
+		virtual void fromAsset(const std::string pFile);
+
 		/**
 		* \brief add a component to the gameobject
 		*		 return the component passed as argument for chaining
 		*/
 		AComponent* addComponent(AComponent* pComponent);
-
-		void addChild(GameObject* pChild);
 
 		/**
 		* \brief simply a shortcut to the transform component of this GameObject

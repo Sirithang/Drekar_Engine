@@ -3,104 +3,94 @@
 #include "component/MeshRenderer.h"
 #include "core/Material.h"
 #include "core/GameTime.h"
+#include "data/Texture2D.h"
 
 #include <time.h>
 
 #include <gl/glew.h>
 
+using namespace de;
+using namespace de::data;
+using namespace de::component;
+
 void MyScreen::init()
 {
 	srand(time(NULL));
 
-	lFirst.init(de::data::Shader::VERTEX);
-	lSecond.init(de::data::Shader::PIXEL);
+	lFirst.init(Shader::ShaderType::VERTEX);
 	lFirst.loadShaderFromFile("data/vertex.vert");
+	lSecond.init(Shader::ShaderType::PIXEL);
 	lSecond.loadShaderFromFile("data/fragment.frag");
-
 	lProg.addShader(lFirst);
 	lProg.addShader(lSecond);
 	lProg.compile();
-	//lProg.use();
 
-	de::Material* lMat = new de::Material();
-	lMat->setProgram(&lProg);
+	Material* mat = new Material();
+	mat->fromFile("data/materials/diffuse.mat");
 
-	de::component::MeshRenderer* lrenderer = (de::component::MeshRenderer*)lObj.addComponent(new de::component::MeshRenderer());
-	lrenderer->setMaterial(lMat);
+	lMat.setProgram(&lProg);
 
-	de::GameObject*			lCamObj = new de::GameObject();
-	lCam = (de::component::Camera*)lCamObj->addComponent(new de::component::Camera());
-
-	lMesh.loadFromFile("data/output.mesh");
+	lMesh.fromFile("data/output.mesh");
 	lMesh.uploadToVRAM();
 
-	lrenderer->setMesh(lMesh);
+	Texture2D* tex = new Texture2D();
+	tex->fromFile("data/texture.dds");
 
-	lObj.transform()->setPosition(glm::vec3(0, 0, 0));
+	lMat.addTexture("_MainTex", tex);
 
-	lCamObj->transform()->setPosition(glm::vec3(0, 5, -40));
+	//--------------------- Create field of object
+
+	for(int i = -2; i <= 2; i++)
+	{
+		for(int j = -2; j <= 2; j++)
+		{
+			GameObject* obj = new GameObject();
+
+			obj->fromAsset("data/assets/head.asset");
+
+			/*MeshRenderer* renderer = (MeshRenderer*)obj->addComponent(new MeshRenderer());
+			renderer->setMaterial(mat);
+			renderer->setMesh(lMesh);*/
+
+			obj->transform()->setPosition(glm::vec3(i*15, 0, j*15));
+		}
+	}
+
+	//--------------------- Camera
+
+	Camera* cam = (Camera*)lCam.addComponent(new Camera());
+	lCam.transform()->setPosition(glm::vec3(0, 80, -70));
+	lCam.transform()->setRotation(glm::quat(glm::vec3(45, 0, 0)));
 
 	//--------------------- ADD A LIGHTS
 	
 	de::GameObject* lLight = new de::GameObject();
-	/*de::component::DirectionalLight* lcomplight = (de::component::DirectionalLight*)lLight->addComponent(new de::component::DirectionalLight());
-	lLight->transform()->setRotation(glm::quat(glm::vec3( -45 * 3.14f * 180.0f, -45 * 3.14f * 180.0f,0)));
-	lLight->transform()->setRotation(glm::quat(glm::vec3(glm::radians(45.0f), glm::radians(45.0f), 0)));
 
-	lcomplight->setColor(glm::vec3(0.8,0.5,0.4));
-	*/
-	//------------------ Second Mesh
-
-	/*de::component::MeshRenderer*	lMeshRenderer	= (de::component::MeshRenderer*)lObj2.addComponent(new de::component::MeshRenderer());
-
-	lObj2.transform()->setPosition(glm::vec3(-12, 0, 0));
-
-	de::data::Mesh mesh;
-	mesh.loadFromFile("data/mesh2.mesh");
-	mesh.uploadToVRAM();
-
-	lMeshRenderer->setMesh(mesh);
-	lMeshRenderer->setMaterial(lMat);*/
-
-	//-----------------
-	//mRoot.addChild(lLight);
-
-
-	for(int i = 0; i < 2; i++)
+	for(int i = 0; i < 1; i++)
 	{
+		de::GameObject* parentObj = new de::GameObject("ParentGameObject");
 		lLight = new de::GameObject();
+
+		lLightObjs.push_back(parentObj);
+		lLight->transform()->setParent(parentObj->transform());
+
 		de::component::PointLight* lpts = (de::component::PointLight*)lLight->addComponent(new de::component::PointLight());
 		//lLight->transform()->setRotation(glm::quat(glm::vec3(0, -45 * 3.14f * 180.0f, 0)));
-		lLight->transform()->setPosition(glm::vec3(rand()%20 - 10,rand()%20 - 10,rand()%20 - 10));
-		lpts->setColor(glm::vec3(rand()%100 * 0.01f,rand()%100 * 0.01f,rand()%100 * 0.01f));
-
-		mRoot.addChild(lLight);
+		lLight->transform()->setLocalPosition(glm::vec3(rand()%50 - 25,rand()%50 - 25,rand()%50 - 25));
+		//lpts->setColor(glm::vec3(rand()%100 * 0.01f,rand()%100 * 0.01f,rand()%100 * 0.01f));
+		lpts->setColor(glm::vec3(1.0f,1.0f,1.0f));
 	}
 
-	//-------------------
-
-	mRoot.addChild(&lObj);
-	mRoot.addChild(lCamObj);
-	
-	mRoot.addChild(&lObj2);
+	lLight = new de::GameObject();
+	lLight->addComponent(new de::component::DirectionalLight());
+	lLight->transform()->setRotation(glm::quat(glm::vec3(glm::radians(90.0f), 0, 0)));
 
 	lAngle = 0;
 }
 
 void MyScreen::draw()
 {
-	/*lProg.use();
 
-	glm::mat4 lMV = glm::translate(glm::mat4(), glm::vec3(0,0,-4));
-	lMV = glm::rotate(lMV, glm::radians(lAngle), glm::vec3(0,1,0));
-	
-
-	glm::mat4 lP = glm::perspective(60.0f, 4.0f/3.0f, 0.01f, 100.0f);
-
-	lProg.setMatrix("projectionMatrix", lP);
-	lProg.setMatrix("modelViewMatrix", lMV);
-
-	lMesh.draw();*/
 }
 
 //--------------------------
@@ -108,6 +98,13 @@ void MyScreen::draw()
 void MyScreen::update()
 {
 	lAngle += 0.6f * de::GameTime::deltaTime();
-	lObj.transform()->setRotation(glm::quat(glm::vec3(0, lAngle, 0)));
-	lObj2.transform()->setRotation(glm::quat(glm::vec3(lAngle, 0,0)));
+
+	std::list<de::GameObject*>::iterator lIt = lLightObjs.begin();
+
+	while(lIt != lLightObjs.end())
+	{
+		(*lIt)->transform()->setRotation(glm::quat(glm::vec3(0, -lAngle, 0)));
+		lIt++;
+	}
+
 }

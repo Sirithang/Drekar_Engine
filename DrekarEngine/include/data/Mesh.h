@@ -8,6 +8,7 @@
 
 #include "export.h"
 #include "core/CountedObject.h"
+#include "core/AssetDatabase.h"
 
 namespace de
 {
@@ -23,7 +24,7 @@ namespace de
 
 			\brief describe a Mesh in memory
 		 */
-		class DE_EXPORT Mesh
+		class DE_EXPORT Mesh : ILoadableAsset 
 		{
 		protected:
 
@@ -56,7 +57,7 @@ namespace de
 
 			~Mesh();
 
-			void loadFromFile(const std::string& pPath);
+			void fromFile(const std::string& pPath);
 			
 			void setVertex(glm::vec3*	pVertex, unsigned int pNb);
 			void setUV(glm::vec2*		pUv);

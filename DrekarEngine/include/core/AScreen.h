@@ -23,8 +23,6 @@ namespace de
 		void internalDraw();
 
 	protected:
-		GameObject mRoot;
-
 		renderer::Renderer	mRenderer;
 
 	public:

@@ -2,7 +2,7 @@
 #define DE_CAMERA_H
 
 #include "core/AComponent.h"
-
+#include "core/ComponentFactory.h"
 #include <list>
 #include <glm/glm.hpp>
 
@@ -13,6 +13,8 @@ namespace de
 		class DE_EXPORT Camera : public AComponent
 		{
 		protected:
+			COMPONENT_DEC_TYPE(Camera);
+
 			static std::list<Camera*> sCameraList;
 			static Camera* sCurrent; // currently used camera
 

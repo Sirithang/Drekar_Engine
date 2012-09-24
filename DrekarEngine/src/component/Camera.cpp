@@ -4,6 +4,8 @@
 
 using namespace de::component;
 
+COMPONENT_DEF_TYPE(Camera);
+
 std::list<Camera*>	Camera::sCameraList;
 Camera*				Camera::sCurrent = nullptr;
 

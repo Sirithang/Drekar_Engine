@@ -3,8 +3,8 @@
 
 #include "export.h"
 #include "core/AComponent.h"
-#include "core/Material.h"
 #include "data/Mesh.h"
+#include "core/Program.h"
 
 #include <glm/glm.hpp>
 

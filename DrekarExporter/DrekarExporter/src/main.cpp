@@ -31,68 +31,81 @@ void loadModel(std::string pPath)
 		exit(-1);
 	}
 
-	aiMesh* lMesh = scene->mMeshes[0];
+	for(int i = 0; i < scene->mNumMeshes; i++)
+	{
+		aiMesh* lMesh = scene->mMeshes[i];
 
-	aiMatrix4x4 lMat;
-	//aiMatrix4x4::RotationX(-90.0f * 3.14f / 180.0f, lMat);
+		aiMatrix4x4 lMat;
+		//aiMatrix4x4::RotationX(-90.0f * 3.14f / 180.0f, lMat);
 
-	int numberOfVertex = lMesh->mNumVertices;
-	unsigned int data = VERTEX;
+		int numberOfVertex = lMesh->mNumVertices;
+		unsigned int data = VERTEX;
 
-	if(lMesh->HasTextureCoords(0))
-		data |= UV;
-	if(lMesh->HasNormals())
-		data |= NORMAL;
-	if(lMesh->HasTangentsAndBitangents())
-		data |= TANGENT;
+		if(lMesh->HasTextureCoords(0))
+			data |= UV;
+		if(lMesh->HasNormals())
+			data |= NORMAL;
+		if(lMesh->HasTangentsAndBitangents())
+			data |= TANGENT;
 
-	aiQuaternion lRotation(aiVector3D(1,0,0), 90.0f); // Y UP
+		aiQuaternion lRotation(aiVector3D(1,0,0), 90.0f); // Y UP
 
-	if(gOutputName == "")
-		gOutputName = pPath + ".mesh";
+		char num[10];
+		itoa(i, num, 10);
 
-	std::fstream lStream(gOutputName, std::ios::binary|std::ios::out);
+		std::string outputPath;
+
+		if(gOutputName == "")
+			outputPath = pPath + "_" + std::string(num) + ".mesh";
+		else
+			outputPath = gOutputName + "_" + std::string(num) + ".mesh";
+
+		std::fstream lStream(outputPath, std::ios::binary|std::ios::out);
 
 	
-	lStream.write((char*)&data, sizeof(unsigned int));
-	lStream.write((char*)&lMesh->mNumVertices, sizeof(unsigned int));
+		lStream.write((char*)&data, sizeof(unsigned int));
+		lStream.write((char*)&lMesh->mNumVertices, sizeof(unsigned int));
 
-	for(int i = 0; i < numberOfVertex; i++)
-	{
-		aiVector3D lPts = lMat* lMesh->mVertices[i];
-
-		lStream.write((char*)&lPts.x, sizeof(float));
-		lStream.write((char*)&lPts.y, sizeof(float));
-		lStream.write((char*)&lPts.z, sizeof(float));
-		
-		/*if(data&UV)
+		for(int i = 0; i < numberOfVertex; i++)
 		{
-			lStream<<lMesh->mTextureCoords[0][i].x<<lMesh->mTextureCoords[0][i].y;
-		}*/
-
-		if(data&NORMAL)
-		{
-			lPts = lMat* lMesh->mNormals[i];
+			aiVector3D lPts = lMat* lMesh->mVertices[i];
 
 			lStream.write((char*)&lPts.x, sizeof(float));
 			lStream.write((char*)&lPts.y, sizeof(float));
 			lStream.write((char*)&lPts.z, sizeof(float));
+		
+			if(data&UV)
+			{
+				lPts = lMesh->mTextureCoords[0][i];
+				lStream.write((char*)&lPts.x, sizeof(float));
+				lStream.write((char*)&lPts.y, sizeof(float));
+				lStream.write((char*)&lPts.z, sizeof(float));
+			}
+
+			if(data&NORMAL)
+			{
+				lPts = lMat* lMesh->mNormals[i];
+
+				lStream.write((char*)&lPts.x, sizeof(float));
+				lStream.write((char*)&lPts.y, sizeof(float));
+				lStream.write((char*)&lPts.z, sizeof(float));
+			}
 		}
-	}
 
-	lStream.write((char*)&lMesh->mNumFaces, sizeof(unsigned int));
+		lStream.write((char*)&lMesh->mNumFaces, sizeof(unsigned int));
 	
-	for(int i = 0; i < lMesh->mNumFaces; i++)
-	{
-		if(lMesh->mFaces[i].mNumIndices != 3)
-			continue;
+		for(int i = 0; i < lMesh->mNumFaces; i++)
+		{
+			if(lMesh->mFaces[i].mNumIndices != 3)
+				continue;
 
-		lStream.write((char*)&lMesh->mFaces[i].mIndices[0], sizeof(unsigned int));
-		lStream.write((char*)&lMesh->mFaces[i].mIndices[1], sizeof(unsigned int));
-		lStream.write((char*)&lMesh->mFaces[i].mIndices[2], sizeof(unsigned int));
+			lStream.write((char*)&lMesh->mFaces[i].mIndices[0], sizeof(unsigned int));
+			lStream.write((char*)&lMesh->mFaces[i].mIndices[1], sizeof(unsigned int));
+			lStream.write((char*)&lMesh->mFaces[i].mIndices[2], sizeof(unsigned int));
+		}
+
+		lStream.close();
 	}
-
-	lStream.close();
 }
 
 

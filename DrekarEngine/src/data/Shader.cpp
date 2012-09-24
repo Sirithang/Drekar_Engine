@@ -77,7 +77,7 @@ bool Shader::loadShader(std::string pCode)
 
 bool Shader::loadShaderFromFile(std::string pPath)
 {
-	std::ifstream t(pPath);
+	std::ifstream t(pPath, std::ios::in);
 
 	if(!t.is_open())
 	{

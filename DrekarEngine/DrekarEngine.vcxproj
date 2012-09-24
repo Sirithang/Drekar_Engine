@@ -92,18 +92,23 @@
     <ClCompile Include="src\component\MeshRenderer.cpp" />
     <ClCompile Include="src\component\Transform.cpp" />
     <ClCompile Include="src\core\AScreen.cpp" />
+    <ClCompile Include="src\core\ComponentFactory.cpp" />
     <ClCompile Include="src\core\Debug.cpp" />
     <ClCompile Include="src\core\Engine.cpp" />
     <ClCompile Include=".\src\data\Mesh.cpp" />
     <ClCompile Include="src\core\Gameobject.cpp" />
     <ClCompile Include="src\core\GameTime.cpp" />
     <ClCompile Include="src\core\Helpers.cpp" />
+    <ClCompile Include="src\core\InputManager.cpp" />
     <ClCompile Include="src\core\Material.cpp" />
     <ClCompile Include="src\core\Program.cpp" />
     <ClCompile Include=".\src\core\AComponent.cpp" />
     <ClCompile Include="src\core\RenderBuffer.cpp" />
     <ClCompile Include="src\data\Shader.cpp" />
     <ClCompile Include="src\data\Texture.cpp" />
+    <ClCompile Include="src\data\Texture2D.cpp" />
+    <ClCompile Include=".\src\ext\jsmn.cpp" />
+    <ClCompile Include="src\io\AInput.cpp" />
     <ClCompile Include="src\renderer\Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -114,20 +119,25 @@
     <ClInclude Include="include\component\MeshRenderer.h" />
     <ClInclude Include="include\component\Transform.h" />
     <ClInclude Include=".\include\core\AComponent.h" />
+    <ClInclude Include="include\core\AssetDatabase.h" />
+    <ClInclude Include="include\core\ComponentFactory.h" />
     <ClInclude Include="include\core\Debug.h" />
     <ClInclude Include="include\core\Engine.h" />
     <ClInclude Include=".\include\core\AScreen.h" />
     <ClInclude Include="include\core\Gameobject.h" />
     <ClInclude Include="include\core\GameTime.h" />
     <ClInclude Include="include\core\Helpers.h" />
+    <ClInclude Include="include\core\InputManager.h" />
     <ClInclude Include="include\core\Material.h" />
     <ClInclude Include="include\core\Program.h" />
     <ClInclude Include="include\core\RenderBuffer.h" />
     <ClInclude Include="include\data\Mesh.h" />
     <ClInclude Include="include\data\Shader.h" />
     <ClInclude Include="include\data\Texture.h" />
+    <ClInclude Include="include\data\Texture2D.h" />
     <ClInclude Include="include\export.h" />
     <ClInclude Include="include\internal\InternalData.h" />
+    <ClInclude Include="include\io\AInput.h" />
     <ClInclude Include="include\renderer\Renderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -8,6 +8,7 @@
 #include <list>
 
 #include "core/AComponent.h"
+#include "core/ComponentFactory.h"
 
 namespace de
 {
@@ -16,6 +17,8 @@ namespace de
 		class DE_EXPORT Transform : public AComponent
 		{
 		protected:
+			COMPONENT_DEC_TYPE(Transform);
+
 			glm::vec3 mPosition;
 			glm::vec3 mLocalPosition;
 			
@@ -25,9 +28,15 @@ namespace de
 			glm::vec3 mLocalScale;
 
 			glm::mat4x4 mMatrix;
+			glm::mat4x4 mCombinedMatrix;
 
 			bool	  mChanged;
 			bool	  mRecomputed;
+
+			Transform*				mParent;
+			std::list<Transform*>	mChildren;
+
+			void parentChanged();
 
 		public:
 			Transform();
@@ -44,6 +53,7 @@ namespace de
 			//-----getter setter
 
 			void setPosition(const glm::vec3& pPosition);
+			void setLocalPosition(const glm::vec3& pPosition);
 			void setRotation(const glm::quat& pRotation);
 			void setScale(const glm::vec3 pScale);
 
@@ -60,6 +70,10 @@ namespace de
 			* \brief return the matrix combining all transformation
 			*/
 			glm::mat4 matrix() const;
+
+			void setParent(Transform* pParent);
+
+			void recomputeMatrix();
 		};
 	}
 }

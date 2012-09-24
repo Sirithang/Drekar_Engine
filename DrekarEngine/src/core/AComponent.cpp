@@ -40,3 +40,10 @@ void AComponent::preDraw()
 void AComponent::render()
 {
 }
+
+//----------------------
+
+void AComponent::fromJSON(const std::string& pData)
+{
+
+}

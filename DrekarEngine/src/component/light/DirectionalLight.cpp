@@ -8,6 +8,8 @@ using namespace de;
 using namespace de::component;
 using namespace de::data;
 
+COMPONENT_DEF_TYPE(DirectionalLight);
+
 void DirectionalLight::init()
 {
 	de::renderer::Renderer::current()->addDirectionaLight(this);

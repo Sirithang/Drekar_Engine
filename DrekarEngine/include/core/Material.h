@@ -2,6 +2,7 @@
 #define DE_MATERIAL_H
 
 #include "core/Program.h"
+#include "core/AssetDatabase.h"
 #include "data/Texture.h"
 
 #include <list>
@@ -14,7 +15,7 @@ namespace de
 		class AShaderArg;
 	}
 
-	class DE_EXPORT Material
+	class DE_EXPORT Material : public ILoadableAsset
 	{
 	protected:
 		std::list<int>	mFreeUnit; // count free texture unit
@@ -26,6 +27,8 @@ namespace de
 		std::list<data::Texture*> mTexture;
 
 	public:
+
+		Material();
 		
 		void setProgram(Program* pProgram);
 		void addTexture(const std::string& pName, data::Texture* pTexture); 
@@ -37,7 +40,7 @@ namespace de
 		*/
 		void setup();
 
-
+		void fromFile(const std::string& pFile);
 	};
 
 

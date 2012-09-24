@@ -29,7 +29,8 @@ void RenderBuffer::init(unsigned int pWidth, unsigned int pHeight)
 	//-------------- we create the default buffer + depth
 
 	data::Texture* lBuffer = new de::data::Texture();
-	lBuffer->create(pWidth, pHeight, GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE);
+	lBuffer->create(pWidth, pHeight);
+	lBuffer->init( GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE);
 
 	mTextures.push_back(lBuffer);
 

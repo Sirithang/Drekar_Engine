@@ -15,12 +15,13 @@ protected:
 	de::data::Shader lFirst;
 	de::data::Shader lSecond;
 	de::Program lProg;
+	de::Material lMat;
 	de::data::Mesh lMesh;
 
-	de::GameObject	lObj;
-	de::GameObject	lObj2;
-	de::component::Camera* lCam;
+	de::GameObject lCam;
 
+	std::list<de::GameObject*> lLightObjs;
+	std::list<de::GameObject*> lObject;
 
 	float lAngle;
 

@@ -15,12 +15,14 @@ Renderer::Renderer()
 	mRenderBuffer.init(de::Engine::width(), de::Engine::height());
 
 	de::data::Texture* lNormalTex = new de::data::Texture();
-	lNormalTex->create(de::Engine::width(), de::Engine::height(), GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE);
+	lNormalTex->create(de::Engine::width(), de::Engine::height());
+	lNormalTex->init(GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE);
 
 	mRenderBuffer.addTexture(lNormalTex);
 
 	de::data::Texture* lDepthTex  = new de::data::Texture();
-	lDepthTex->create(de::Engine::width(), de::Engine::height(), GL_LUMINANCE32F_ARB, GL_LUMINANCE, GL_FLOAT);
+	lDepthTex->create(de::Engine::width(), de::Engine::height());
+	lDepthTex->init( GL_LUMINANCE32F_ARB, GL_LUMINANCE, GL_FLOAT);
 
 	mRenderBuffer.addTexture(lDepthTex);
 
@@ -130,7 +132,7 @@ void Renderer::initPointLights()
 	lIt++;
 	mPointLightsMat.addTexture("_Depth",   (*lIt));
 
-	mPointLightsMesh.loadFromFile("data/sphere.mesh");
+	mPointLightsMesh.fromFile("data/sphere.mesh");
 	mPointLightsMesh.uploadToVRAM();
 }
 

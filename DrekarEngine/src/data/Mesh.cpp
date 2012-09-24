@@ -153,7 +153,7 @@ void Mesh::draw()
 
 //----------------------------------
 
-void Mesh::loadFromFile(const std::string& pFile)
+void Mesh::fromFile(const std::string& pFile)
 {
 	std::fstream lFile;
 
@@ -174,11 +174,22 @@ void Mesh::loadFromFile(const std::string& pFile)
 		if(data&DATA_NORMAL)
 			mNormals = new glm::vec3[mNbVertex];
 
+		if(data&DATA_UV)
+			mUvs = new glm::vec2[mNbVertex];
+
 		for(int i = 0; i < mNbVertex; i++)
 		{
 			lFile.read((char*)&mVertex[i].x,sizeof(float));
 			lFile.read((char*)&mVertex[i].y,sizeof(float));
 			lFile.read((char*)&mVertex[i].z,sizeof(float));
+
+			if(data&DATA_UV)
+			{
+				float temp;
+				lFile.read((char*)&mUvs[i].x,sizeof(float));
+				lFile.read((char*)&mUvs[i].y,sizeof(float));
+				lFile.read((char*)&temp,sizeof(float));
+			}
 
 			if(data&DATA_NORMAL)
 			{
@@ -201,5 +212,7 @@ void Mesh::loadFromFile(const std::string& pFile)
 		}
 
 		lFile.close();
+
+		uploadToVRAM();
 	}
 }

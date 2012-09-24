@@ -24,7 +24,12 @@ namespace de
 			Texture();
 			~Texture();
 
-			virtual void create(unsigned int pWidth,unsigned int pHeight, GLint pInternalFormat, GLint pFormat, GLint pDataFormat);
+			virtual void create(unsigned int pWidth,unsigned int pHeight);
+
+			/**
+			* \brief initialize the texture to an undefined texture of the formats given. Usefull for RenderTarget purpose!
+			*/
+			void init(GLint pInternalFormat, GLint pFormat, GLint pDataFormat);
 
 			unsigned int width() const;
 			unsigned int height() const;

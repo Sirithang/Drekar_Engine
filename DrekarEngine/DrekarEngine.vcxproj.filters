@@ -46,6 +46,12 @@
     <Filter Include="Source Files\component\light">
       <UniqueIdentifier>{436df8a6-d97b-4dfb-8d7a-13246a5b7106}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\io">
+      <UniqueIdentifier>{9044a4a5-d885-4a97-afb2-344f159f44d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\io">
+      <UniqueIdentifier>{43e965bf-33d0-47c0-a6fc-dfa31ef9c7ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include=".\src\data\Mesh.cpp">
@@ -107,6 +113,21 @@
     </ClCompile>
     <ClCompile Include="src\component\light\PointLight.cpp">
       <Filter>Source Files\component\light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\data\Texture2D.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include=".\src\ext\jsmn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\ComponentFactory.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\InputManager.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\AInput.cpp">
+      <Filter>Source Files\io</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +196,21 @@
     </ClInclude>
     <ClInclude Include="include\component\light\PointLight.h">
       <Filter>Header Files\component\light</Filter>
+    </ClInclude>
+    <ClInclude Include="include\data\Texture2D.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\ComponentFactory.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\AssetDatabase.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\InputManager.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\io\AInput.h">
+      <Filter>Header Files\io</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

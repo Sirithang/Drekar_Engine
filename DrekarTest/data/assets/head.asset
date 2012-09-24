@@ -1,0 +1,7 @@
+{
+	"MeshRenderer" : 
+	{ 	
+		"mesh" : "data/output.mesh", 
+		"material" : "data/materials/diffuse.mat" 
+	}
+}

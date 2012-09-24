@@ -15,15 +15,21 @@ Texture::~Texture()
 
 //------------------------------
 
-void Texture::create(unsigned int pWidth, unsigned int pHeight, GLint pInternalFormat, GLint pFormat, GLint pDataFormat)
+void Texture::create(unsigned int pWidth, unsigned int pHeight)
 {
 	glGenTextures(1, &mID);
 	glBindTexture(GL_TEXTURE_2D, mID);
 
 	mWidth = pWidth;
 	mHeight = pHeight;
+}
 
-	glTexImage2D(GL_TEXTURE_2D, 0, pInternalFormat, pWidth, pHeight, 0, pFormat, pDataFormat, 0);
+//-----------------------------
+
+void Texture::init(GLint pInternalFormat, GLint pFormat, GLint pDataFormat)
+{
+	
+	glTexImage2D(GL_TEXTURE_2D, 0, pInternalFormat, mWidth, mHeight, 0, pFormat, pDataFormat, 0);
 
 	//--- by default we set nearest filtering, to accomodate easily with RT
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

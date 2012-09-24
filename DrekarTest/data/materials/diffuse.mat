@@ -1,0 +1,5 @@
+{
+	"vertex" : "data/vertex.vert",
+	"fragment" : "data/fragment.frag",
+	"textures" : [ { "_MainTex" : "data/texture2.dds" } ]
+}
