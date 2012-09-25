@@ -110,6 +110,7 @@
     <ClCompile Include=".\src\ext\jsmn.cpp" />
     <ClCompile Include="src\io\AInput.cpp" />
     <ClCompile Include="src\io\KeyboardInput.cpp" />
+    <ClCompile Include="src\io\MouseInput.cpp" />
     <ClCompile Include="src\renderer\Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +141,7 @@
     <ClInclude Include="include\internal\InternalData.h" />
     <ClInclude Include="include\io\AInput.h" />
     <ClInclude Include="include\io\KeyboardInput.h" />
+    <ClInclude Include="include\io\MouseInput.h" />
     <ClInclude Include="include\renderer\Renderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

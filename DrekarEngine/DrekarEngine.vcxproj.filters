@@ -132,6 +132,9 @@
     <ClCompile Include="src\io\KeyboardInput.cpp">
       <Filter>Source Files\io</Filter>
     </ClCompile>
+    <ClCompile Include="src\io\MouseInput.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\export.h">
@@ -216,6 +219,9 @@
       <Filter>Header Files\io</Filter>
     </ClInclude>
     <ClInclude Include="include\io\KeyboardInput.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\io\MouseInput.h">
       <Filter>Header Files\io</Filter>
     </ClInclude>
   </ItemGroup>

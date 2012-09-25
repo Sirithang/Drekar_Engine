@@ -7,6 +7,7 @@
 #include "data/Texture2D.h"
 #include "core/InputManager.h"
 #include "io/KeyboardInput.h"
+#include "io/MouseInput.h"
 
 #include <time.h>
 
@@ -21,6 +22,7 @@ void MyScreen::init()
 	srand(time(NULL));
 
 	InputManager::addInputSource(new io::KeyboardInput("Keyboard"));
+	InputManager::addInputSource(new io::MouseInput("Mouse"));
 
 	//--------------------- Create field of object
 
