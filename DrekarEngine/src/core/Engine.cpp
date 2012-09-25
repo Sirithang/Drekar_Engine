@@ -7,6 +7,7 @@
 #include "core/Program.h"
 #include "core/GameTime.h"
 #include "core/Helpers.h"
+#include "core/InputManager.h"
 
 #include <windows.h>
 
@@ -29,6 +30,9 @@ Engine::Engine(int pWidth, int pHeight, bool pFullscreen)
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
+
+	InputManager::init();
+
 	//glEnable(GL_CULL_FACE);
 }
 
@@ -57,6 +61,8 @@ void Engine::loop()
 	while(sInstance->mRunning)
 	{
 		GameTime::tick();
+
+		InputManager::update();
 
 		//------ init recently pushed screens
 		std::list<AScreen*>::iterator lIt = sInstance->mInitScreens.begin();

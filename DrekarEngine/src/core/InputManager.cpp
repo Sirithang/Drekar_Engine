@@ -7,6 +7,12 @@ using namespace de::io;
 
 InputManager* InputManager::sInstance = nullptr;
 
+void InputManager::init()
+{
+	sInstance = new InputManager();
+}
+
+//***********************************
 
 void InputManager::update()
 {
@@ -18,6 +24,9 @@ void InputManager::update()
 		it++;
 	}
 }
+
+//***********************************
+
 
 io::AInput* InputManager::getInputFromType(const std::string& pType)
 {
@@ -35,6 +44,8 @@ io::AInput* InputManager::getInputFromType(const std::string& pType)
 	return nullptr;
 }
 
+//***********************************
+
 io::AInput* InputManager::getInputFromName(const std::string& pName)
 {
 	if(sInstance->mInputs.count(pName) > 0)
@@ -42,6 +53,8 @@ io::AInput* InputManager::getInputFromName(const std::string& pName)
 
 	return nullptr;
 }
+
+//***********************************
 
 io::AInput* InputManager::addInputSource(io::AInput* pInput)
 {
@@ -54,6 +67,8 @@ io::AInput* InputManager::addInputSource(io::AInput* pInput)
 	sInstance->mInputs[pInput->mName] = pInput;
 	return pInput;
 }
+
+//***********************************
 
 void InputManager::removeInputSource(io::AInput* pInput)
 {

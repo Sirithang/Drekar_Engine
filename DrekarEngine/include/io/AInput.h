@@ -10,12 +10,12 @@ namespace de
 {
 	namespace io
 	{
-		class AInput
+		class DE_EXPORT AInput
 		{
 		protected:
 			std::map<std::string, float>	mAxis;
-			std::string							mName;
-			std::string							mType;
+			std::string						mName;
+			std::string						mType;
 
 			friend class InputManager;
 

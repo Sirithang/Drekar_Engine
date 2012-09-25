@@ -1,9 +1,12 @@
 #include "MyScreen.h"
+#include "CameraMover.h"
 
 #include "component/MeshRenderer.h"
 #include "core/Material.h"
 #include "core/GameTime.h"
 #include "data/Texture2D.h"
+#include "core/InputManager.h"
+#include "io/KeyboardInput.h"
 
 #include <time.h>
 
@@ -17,26 +20,7 @@ void MyScreen::init()
 {
 	srand(time(NULL));
 
-	lFirst.init(Shader::ShaderType::VERTEX);
-	lFirst.loadShaderFromFile("data/vertex.vert");
-	lSecond.init(Shader::ShaderType::PIXEL);
-	lSecond.loadShaderFromFile("data/fragment.frag");
-	lProg.addShader(lFirst);
-	lProg.addShader(lSecond);
-	lProg.compile();
-
-	Material* mat = new Material();
-	mat->fromFile("data/materials/diffuse.mat");
-
-	lMat.setProgram(&lProg);
-
-	lMesh.fromFile("data/output.mesh");
-	lMesh.uploadToVRAM();
-
-	Texture2D* tex = new Texture2D();
-	tex->fromFile("data/texture.dds");
-
-	lMat.addTexture("_MainTex", tex);
+	InputManager::addInputSource(new io::KeyboardInput("Keyboard"));
 
 	//--------------------- Create field of object
 
@@ -48,10 +32,6 @@ void MyScreen::init()
 
 			obj->fromAsset("data/assets/head.asset");
 
-			/*MeshRenderer* renderer = (MeshRenderer*)obj->addComponent(new MeshRenderer());
-			renderer->setMaterial(mat);
-			renderer->setMesh(lMesh);*/
-
 			obj->transform()->setPosition(glm::vec3(i*15, 0, j*15));
 		}
 	}
@@ -61,6 +41,8 @@ void MyScreen::init()
 	Camera* cam = (Camera*)lCam.addComponent(new Camera());
 	lCam.transform()->setPosition(glm::vec3(0, 80, -70));
 	lCam.transform()->setRotation(glm::quat(glm::vec3(45, 0, 0)));
+
+	lCam.addComponent(new CameraMover());
 
 	//--------------------- ADD A LIGHTS
 	
@@ -75,9 +57,7 @@ void MyScreen::init()
 		lLight->transform()->setParent(parentObj->transform());
 
 		de::component::PointLight* lpts = (de::component::PointLight*)lLight->addComponent(new de::component::PointLight());
-		//lLight->transform()->setRotation(glm::quat(glm::vec3(0, -45 * 3.14f * 180.0f, 0)));
 		lLight->transform()->setLocalPosition(glm::vec3(rand()%50 - 25,rand()%50 - 25,rand()%50 - 25));
-		//lpts->setColor(glm::vec3(rand()%100 * 0.01f,rand()%100 * 0.01f,rand()%100 * 0.01f));
 		lpts->setColor(glm::vec3(1.0f,1.0f,1.0f));
 	}
 
@@ -97,7 +77,13 @@ void MyScreen::draw()
 
 void MyScreen::update()
 {
-	lAngle += 0.6f * de::GameTime::deltaTime();
+
+	io::AInput* input = InputManager::getInputFromName("Keyboard");
+
+	if(input->getAxis(" ") > 0.1f)
+	{
+		lAngle += 0.6f * de::GameTime::deltaTime();
+	}
 
 	std::list<de::GameObject*>::iterator lIt = lLightObjs.begin();
 

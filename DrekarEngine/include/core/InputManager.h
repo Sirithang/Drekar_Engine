@@ -14,12 +14,14 @@ namespace de
 
 	class Engine;
 
-	class InputManager
+	class DE_EXPORT InputManager
 	{
 	protected:
 		static InputManager* sInstance;
 		
 		std::map<std::string, io::AInput*> mInputs;
+
+		static void init();
 
 		friend class de::Engine;
 	public:

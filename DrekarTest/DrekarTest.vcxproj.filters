@@ -24,9 +24,15 @@
     <ClCompile Include="src\MyScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\CameraMover.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\MyScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CameraMover.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

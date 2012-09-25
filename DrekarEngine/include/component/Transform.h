@@ -57,8 +57,9 @@ namespace de
 			void setRotation(const glm::quat& pRotation);
 			void setScale(const glm::vec3 pScale);
 
-			glm::vec3 forward();
-			glm::vec3 up();
+			glm::vec3 forward() const;
+			glm::vec3 up() const;
+			glm::vec3 left() const;
 
 			const glm::vec3& position();
 			const glm::quat& rotation();

@@ -80,9 +80,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\CameraMover.cpp" />
     <ClCompile Include="src\MyScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\CameraMover.h" />
     <ClInclude Include="include\MyScreen.h" />
   </ItemGroup>
   <ItemGroup>

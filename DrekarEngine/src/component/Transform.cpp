@@ -109,16 +109,23 @@ void Transform::setScale(glm::vec3 pScale)
 
 //---------------------------------
 
-glm::vec3 Transform::forward()
+glm::vec3 Transform::forward() const
 {
 	return glm::normalize(mRotation * glm::vec3(0,0,1));
 }
 
 //---------------------------------
 
-glm::vec3 Transform::up()
+glm::vec3 Transform::up() const
 {
 	return glm::normalize(mRotation * glm::vec3(0,1,0));
+}
+
+//--------------------------------
+
+glm::vec3 Transform::left() const
+{
+	return glm::normalize(mRotation * glm::vec3(1,0,0));
 }
 
 //--------------------------------
