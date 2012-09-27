@@ -135,6 +135,9 @@
     <ClCompile Include="src\io\MouseInput.cpp">
       <Filter>Source Files\io</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\ARenderable.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\export.h">
@@ -223,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="include\io\MouseInput.h">
       <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\ARenderable.h">
+      <Filter>Header Files\core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

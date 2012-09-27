@@ -12,7 +12,7 @@ layout(location = 2) out vec4 outputDepth;
 
 void main() 
 { 
-	vec4 col = texture2D(_MainTex, theUv);
+	vec4 col = texture2D(_MainTex, vec2(theUv.x, 1.0 - theUv.y));
    outputColor = vec4(col.xyz, 0.1);//vec4(1,1,1,0.1);
    outputNormal = vec4((theNormal + 1) * 0.5, 4);
    outputDepth.r = theDepth.x / theDepth.y;

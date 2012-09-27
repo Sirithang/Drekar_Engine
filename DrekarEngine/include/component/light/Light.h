@@ -4,7 +4,10 @@
 #include "export.h"
 #include "core/AComponent.h"
 #include "data/Mesh.h"
+#include "data/Texture.h"
 #include "core/Program.h"
+
+#include <map>
 
 #include <glm/glm.hpp>
 
@@ -18,12 +21,25 @@ namespace de
 		*/
 		class DE_EXPORT Light : public AComponent
 		{
+		public:
+			typedef std::multimap<unsigned char, Light*> multimap_t;
+
 		protected:
-			float		mIntensity;
-			glm::vec3	mColor;
+			//Light are ordered by type (uchar), this allow for differentiation when rendering
+			static multimap_t sLights;
+
+
+			float			mIntensity;
+			glm::vec3		mColor;
+			unsigned char	mType;
+
+			multimap_t::iterator mIterator;//stocking it for qucik erasing
+
+			void internalSetup(Program* pProg);
 
 		public:
-			Light();
+			Light(unsigned char pType);
+			virtual ~Light();
 
 			//---get/set--
 
@@ -33,14 +49,21 @@ namespace de
 			void setIntensity(float pValue);
 			void setColor(const glm::vec3& pValue);
 
+			static multimap_t& getLights();
+
 			//--------
 
 			virtual void init() = 0;
 
 			/**
+			* \brief	this function need to be called ony to the first light of the type renderered, it setup all common ifno to this type
+			*/
+			virtual void setupLightType(de::data::Texture* pAlbedo, de::data::Texture* pNormal, de::data::Texture* pDepth) = 0;
+
+			/**
 			* \brief this fonction pass the different information usefull to the shader, according to the light type
 			*/
-			virtual void setup(Program* pProg) = 0;
+			virtual void setup() = 0;
 		};
 	}
 }

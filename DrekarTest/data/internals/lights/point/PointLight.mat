@@ -1,0 +1,4 @@
+{
+	"vertex" 	: "data/internals/lights/point/PointLight.vert",
+	"fragment" 	: "data/internals/lights/point/PointLight.frag"
+}

@@ -1,6 +1,7 @@
 #include "core/Material.h"
 #include "data/texture2D.h"
 #include "core/Debug.h"
+#include "component/Camera.h"
 
 #include "jsmn/jsmn.h"
 
@@ -8,10 +9,29 @@
 
 using namespace de;
 
+std::list<int16_t>	Material::sFreeIDs;
+int16_t				Material::sIDCounter = 0;
+
 
 Material::Material()
 {
 	mProgram = nullptr;
+
+	if(sFreeIDs.size() > 0)
+	{
+		mID = sFreeIDs.front();
+		sFreeIDs.pop_front();
+	}
+	else
+	{
+		sIDCounter++;
+		mID = sIDCounter;
+	}
+}
+
+Material::~Material()
+{
+	sFreeIDs.push_back(mID);
 }
 
 //------------------------------------
@@ -23,7 +43,7 @@ Program* Material::program() const
 
 //-------------------------------
 
-void Material::setup()
+void Material::setup(bool pForCurrentCam)
 {
 	mProgram->use();
 
@@ -32,6 +52,12 @@ void Material::setup()
 	{
 		(*lIt).second->upload(mProgram);
 		lIt++;
+	}
+
+	if(pForCurrentCam)
+	{
+		mProgram->setMatrix("MATRIX_P",	component::Camera::current()->projectionMatrix());
+		mProgram->setMatrix("MATRIX_V",	component::Camera::current()->viewMatrix());
 	}
 }
 
@@ -50,14 +76,29 @@ void Material::setProgram(Program* pProgram)
 
 //---------------------
 
+int16_t Material::getID()
+{
+	return mID;
+}
+
+//---------------------
+
 void Material::addTexture(const std::string& pName, data::Texture* pTexture)
 {
-	mTexture.push_back(pTexture);
 
-	int id = mFreeUnit.front();
-	mFreeUnit.pop_front();
+	if(mArguments.count(pName) == 0)
+	{
+		//mTexture.push_back(pTexture);
 
-	mArguments[pName] = new argv::TextureArg(pName, id, pTexture);
+		int id = mFreeUnit.front();
+		mFreeUnit.pop_front();
+
+		mArguments[pName] = new argv::TextureArg(pName, id, pTexture);
+	}
+	else
+	{
+		((argv::TextureArg*)mArguments[pName])->changeTexture(pTexture);
+	}
 }
 
 //----------------------
@@ -223,6 +264,11 @@ void argv::TextureArg::upload(Program* pProgram)
 {
 	mTexture->bind(mData);
 	pProgram->setInt(mName, mData);
+}
+
+void argv::TextureArg::changeTexture(de::data::Texture* pTex)
+{
+	mTexture = pTex;
 }
 
 //-------------------------------

@@ -16,24 +16,27 @@ void CameraMover::init()
 
 void CameraMover::update()
 {
+
+	const float speed = 20;
+
 	if(mKeyboard->getAxis("Z"))
 	{
-		mOwner->transform()->setPosition(mOwner->transform()->position() + mOwner->transform()->forward() * (GameTime::deltaTime() * 10));
+		mOwner->transform()->setPosition(mOwner->transform()->position() + mOwner->transform()->forward() * (GameTime::deltaTime() * speed));
 	}
 
 	if(mKeyboard->getAxis("S"))
 	{
-		mOwner->transform()->setPosition(mOwner->transform()->position() + mOwner->transform()->forward() * (GameTime::deltaTime() * -10));
+		mOwner->transform()->setPosition(mOwner->transform()->position() + mOwner->transform()->forward() * (GameTime::deltaTime() * -speed));
 	}
 
 	if(mKeyboard->getAxis("Q"))
 	{
-		mOwner->transform()->setPosition(mOwner->transform()->position() + mOwner->transform()->left() * (GameTime::deltaTime() * 10));
+		mOwner->transform()->setPosition(mOwner->transform()->position() + mOwner->transform()->left() * (GameTime::deltaTime() * speed));
 	}
 
 	if(mKeyboard->getAxis("D"))
 	{
-		mOwner->transform()->setPosition(mOwner->transform()->position() + mOwner->transform()->left() * (GameTime::deltaTime() * -10));
+		mOwner->transform()->setPosition(mOwner->transform()->position() + mOwner->transform()->left() * (GameTime::deltaTime() * -speed));
 	}
 
 

@@ -1,6 +1,7 @@
 #include "renderer/Renderer.h"
 #include "core/Engine.h"
 #include "core/Helpers.h"
+#include "core/ARenderable.h"
 
 #include "internal/InternalData.h"
 #include "component/Camera.h"
@@ -14,17 +15,19 @@ Renderer::Renderer()
 {
 	mRenderBuffer.init(de::Engine::width(), de::Engine::height());
 
-	de::data::Texture* lNormalTex = new de::data::Texture();
-	lNormalTex->create(de::Engine::width(), de::Engine::height());
-	lNormalTex->init(GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE);
+	mAlbedo = (*mRenderBuffer.getTextures().begin());
 
-	mRenderBuffer.addTexture(lNormalTex);
+	mNormal = new de::data::Texture();
+	mNormal->create(de::Engine::width(), de::Engine::height());
+	mNormal->init(GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE);
 
-	de::data::Texture* lDepthTex  = new de::data::Texture();
-	lDepthTex->create(de::Engine::width(), de::Engine::height());
-	lDepthTex->init( GL_LUMINANCE32F_ARB, GL_LUMINANCE, GL_FLOAT);
+	mRenderBuffer.addTexture(mNormal);
 
-	mRenderBuffer.addTexture(lDepthTex);
+	mDepth  = new de::data::Texture();
+	mDepth->create(de::Engine::width(), de::Engine::height());
+	mDepth->init( GL_LUMINANCE32F_ARB, GL_LUMINANCE, GL_FLOAT);
+
+	mRenderBuffer.addTexture(mDepth);
 
 	mAmbient = glm::vec3(0,0,0);
 
@@ -77,65 +80,7 @@ void Renderer::buildClearMat()
 void Renderer::buildLightBufferMat()
 {
 	mLightBuffer.init(de::Engine::width(), de::Engine::height());
-
-	
-	initDirectionalLights();
-	initPointLights();
 }
-
-//--------------------------
-
-void Renderer::initDirectionalLights()
-{
-	de::data::Shader lDirectionalVert(de::data::Shader::VERTEX);
-	lDirectionalVert.loadShaderFromFile("data/DirectionalLight.vert");
-
-	de::data::Shader lDirectionalFrag(de::data::Shader::PIXEL);;
-	lDirectionalFrag.loadShaderFromFile("data/DirectionalLight.frag");
-
-	de::Program* lGBufferProg = new de::Program();
-	lGBufferProg->addShader(lDirectionalVert);
-	lGBufferProg->addShader(lDirectionalFrag);
-	lGBufferProg->compile();
-
-	std::list<data::Texture*>::const_iterator lIt = mRenderBuffer.getTextures().begin();
-
-	mDiretionalLightMat.setProgram(lGBufferProg);
-	mDiretionalLightMat.addTexture("_Albedo", (*lIt));
-	lIt++;
-	mDiretionalLightMat.addTexture("_Normal", (*lIt));
-	lIt++;
-	mDiretionalLightMat.addTexture("_Depth",   (*lIt));
-}
-
-//--------------------------
-
-void Renderer::initPointLights()
-{
-	de::data::Shader lDirectionalVert(de::data::Shader::VERTEX);
-	lDirectionalVert.loadShaderFromFile("data/PointLight.vert");
-
-	de::data::Shader lDirectionalFrag(de::data::Shader::PIXEL);;
-	lDirectionalFrag.loadShaderFromFile("data/PointLight.frag");
-
-	de::Program* lGBufferProg = new de::Program();
-	lGBufferProg->addShader(lDirectionalVert);
-	lGBufferProg->addShader(lDirectionalFrag);
-	lGBufferProg->compile();
-
-	std::list<data::Texture*>::const_iterator lIt = mRenderBuffer.getTextures().begin();
-
-	mPointLightsMat.setProgram(lGBufferProg);
-	mPointLightsMat.addTexture("_Albedo", (*lIt));
-	lIt++;
-	mPointLightsMat.addTexture("_Normal", (*lIt));
-	lIt++;
-	mPointLightsMat.addTexture("_Depth",   (*lIt));
-
-	mPointLightsMesh.fromFile("data/sphere.mesh");
-	mPointLightsMesh.uploadToVRAM();
-}
-
 
 //--------------------------
 
@@ -161,17 +106,46 @@ void Renderer::render()
 
 	// -- clear the buffers
 	glDisable(GL_DEPTH_TEST);
-	mClearMaterial.setup();
+	mClearMaterial.setup(false);
 	Helpers::drawQuad();
 	glEnable(GL_DEPTH_TEST);
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 
-	std::list<AComponent*>::iterator lIt = mRenderables.begin();
-	while(lIt != mRenderables.end())
-	{
-		(*lIt)->render();
+
+	//---------list buding
+
+	std::list<ARenderable*> renderabeList = ARenderable::getRenderables();
+
+	typedef std::multimap<uint32_t, ARenderable*>  multimap_renderer;
+	multimap_renderer orderedList;
+
+	std::list<ARenderable*>::iterator lIt = renderabeList.begin();
+
+	while(lIt != renderabeList.end())
+	{//building the ordered map, ordered by the key (containing material and other infos)
+		orderedList.insert(std::pair<uint32_t, ARenderable*>((*lIt)->getKey(), (*lIt)));
 		lIt++;
+	}
+
+	//--------------------
+
+	uint16_t lastMatID = 0;
+
+	multimap_renderer::iterator itRendederer = orderedList.begin();
+	while(itRendederer != orderedList.end())
+	{
+		uint32_t key = itRendederer->first;
+		uint16_t materialID = key & 0x0000FFFF;
+
+		if(materialID != lastMatID)
+		{
+			lastMatID = materialID;
+			itRendederer->second->setup();
+		}
+
+		itRendederer->second->render();
+		itRendederer++;
 	}
 
 	mRenderBuffer.unbind();
@@ -188,8 +162,21 @@ void Renderer::render()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 
-	renderDirectionalLights();
-	renderPointLights();
+	component::Light::multimap_t mapLight = component::Light::getLights();
+
+	component::Light::multimap_t::iterator itLight = mapLight.begin();
+
+	unsigned char previousLightType = 0;
+	while(itLight != mapLight.end())
+	{
+		if(itLight->first != previousLightType)
+		{
+			itLight->second->setupLightType(mAlbedo, mNormal, mDepth);
+		}
+
+		itLight->second->setup();
+		itLight++;
+	}
 
 	glDisable(GL_BLEND);
 	glEnable(GL_DEPTH_TEST);
@@ -197,73 +184,9 @@ void Renderer::render()
 
 	mLightBuffer.unbind();
 
-	mCombineMaterial.setup();
+	mCombineMaterial.setup(false);
 
 	Helpers::drawQuad();
 }
 
-//-------------------------
-
-void Renderer::addRenderable(AComponent* pComponent)
-{
-	mRenderables.push_back(pComponent);
-}
-
 //------------------------
-
-void Renderer::removeRenderable(AComponent* pComponent)
-{
-	mRenderables.remove(pComponent);
-}
-
-//---------------------------
-
-void Renderer::addDirectionaLight(de::component::DirectionalLight* pLight)
-{
-	mDirectionalLights.push_back(pLight);
-}
-
-//----------------------------
-
-void Renderer::addPointLight(de::component::PointLight* pLight)
-{
-	mPointLights.push_back(pLight);
-}
-
-//---------------------------
-
-void Renderer::renderDirectionalLights()
-{
-	std::list<de::component::DirectionalLight*>::iterator lIt = mDirectionalLights.begin();
-	mDiretionalLightMat.setup();
-	mDiretionalLightMat.program()->setMatrix("_InvertP", glm::inverse(component::Camera::current()->projectionMatrix()));
-
-	while(lIt != mDirectionalLights.end())
-	{
-		(*lIt)->setup(mDiretionalLightMat.program());
-
-		Helpers::drawQuad();
-
-		lIt++;
-	}
-}
-
-//------------------------
-
-void Renderer::renderPointLights()
-{
-	std::list<de::component::PointLight*>::iterator lIt = mPointLights.begin();
-	mPointLightsMat.setup();
-	mPointLightsMat.program()->setMatrix("_InvertP", glm::inverse(component::Camera::current()->projectionMatrix()));
-	mPointLightsMat.program()->setMatrix("MATRIX_P", component::Camera::current()->projectionMatrix());
-	mPointLightsMat.program()->setMatrix("MATRIX_V", component::Camera::current()->viewMatrix());
-
-	while(lIt != mPointLights.end())
-	{
-		(*lIt)->setup(mPointLightsMat.program());
-
-		mPointLightsMesh.draw();
-
-		lIt++;
-	}
-}

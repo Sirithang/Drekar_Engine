@@ -1,7 +1,7 @@
 {
 	"MeshRenderer" : 
 	{ 	
-		"mesh" : "data/output.mesh", 
-		"material" : "data/materials/diffuse.mat" 
+		"mesh" : "data/assets/head 1_lowpoly.obj_0.mesh", 
+		"material" : "data/materials/head.mat" 
 	}
 }

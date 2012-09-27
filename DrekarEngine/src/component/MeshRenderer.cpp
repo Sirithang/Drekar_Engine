@@ -13,20 +13,34 @@ COMPONENT_DEF_TYPE(MeshRenderer);
 
 void MeshRenderer::init()
 {
-	de::renderer::Renderer::current()->addRenderable(this);
+	
 }
 
 //----------------------------
 
-void MeshRenderer::render()
+void MeshRenderer::setup()
 {
 	mMaterial->setup();
+}
 
-	mMaterial->program()->setMatrix("MATRIX_P",	Camera::current()->projectionMatrix());
-	mMaterial->program()->setMatrix("MATRIX_V",	Camera::current()->viewMatrix());
+//---------------------------
+
+void MeshRenderer::render()
+{
 	mMaterial->program()->setMatrix("MATRIX_M", mOwner->transform()->matrix());
 
 	mMesh->draw();
+}
+
+//------------------------
+
+uint32_t MeshRenderer::getKey() const
+{
+	uint32_t key = 0;
+
+	key |= (uint32_t)mMaterial->getID();
+
+	return key;
 }
 
 //-------------------------
@@ -80,3 +94,5 @@ void MeshRenderer::fromJSON(const std::string& pData)
 		}
 	}
 }
+
+//--------------------------------------------------------------

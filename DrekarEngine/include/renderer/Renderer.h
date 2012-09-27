@@ -26,20 +26,12 @@ namespace de
 			RenderBuffer			mRenderBuffer;
 			RenderBuffer			mLightBuffer;
 
-			std::list<AComponent*>	mRenderables;
-
 			Material				mClearMaterial;
 			Material				mCombineMaterial;
 
-			//------ point light
-			std::list<de::component::PointLight*>		mPointLights;
-			Material									mPointLightsMat;
-			data::Mesh									mPointLightsMesh;
-
-
-			//------ directional light
-			std::list<de::component::DirectionalLight*> mDirectionalLights;
-			Material									mDiretionalLightMat;
+			de::data::Texture*		mAlbedo;
+			de::data::Texture*		mNormal;
+			de::data::Texture*		mDepth;
 
 			glm::vec3				mAmbient;
 			
@@ -50,20 +42,11 @@ namespace de
 			void initDirectionalLights();
 			void initPointLights();
 
-			void renderDirectionalLights();
-			void renderPointLights();
-
 		public:
 			Renderer();
 
 			void setup();
 			void render();
-
-			void addRenderable(AComponent* pComponent);
-			void removeRenderable(AComponent* pComponent);
-
-			void addDirectionaLight(de::component::DirectionalLight* pLight);
-			void addPointLight(de::component::PointLight* pLight);
 
 			static Renderer* current();
 		};

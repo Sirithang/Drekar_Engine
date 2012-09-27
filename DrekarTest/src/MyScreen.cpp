@@ -26,21 +26,22 @@ void MyScreen::init()
 
 	//--------------------- Create field of object
 
-	for(int i = -2; i <= 2; i++)
+	for(int i = -5; i <= 5; i++)
 	{
-		for(int j = -2; j <= 2; j++)
+		for(int j = -5; j <= 5; j++)
 		{
 			GameObject* obj = new GameObject();
 
-			obj->fromAsset("data/assets/head.asset");
+			obj->fromAsset("data/assets/alien/alien.asset");
 
-			obj->transform()->setPosition(glm::vec3(i*15, 0, j*15));
+			obj->transform()->setPosition(glm::vec3(i*8, 0, j*8));
 		}
 	}
 
 	//--------------------- Camera
 
 	Camera* cam = (Camera*)lCam.addComponent(new Camera());
+	cam->setClipPlane(glm::vec2(0.1f, 1000.0f));
 	lCam.transform()->setPosition(glm::vec3(0, 80, -70));
 	lCam.transform()->setRotation(glm::quat(glm::vec3(45, 0, 0)));
 
@@ -50,7 +51,9 @@ void MyScreen::init()
 	
 	de::GameObject* lLight = new de::GameObject();
 
-	for(int i = 0; i < 1; i++)
+	const int range = 100;
+
+	for(int i = 0; i < 20; i++)
 	{
 		de::GameObject* parentObj = new de::GameObject("ParentGameObject");
 		lLight = new de::GameObject();
@@ -59,13 +62,14 @@ void MyScreen::init()
 		lLight->transform()->setParent(parentObj->transform());
 
 		de::component::PointLight* lpts = (de::component::PointLight*)lLight->addComponent(new de::component::PointLight());
-		lLight->transform()->setLocalPosition(glm::vec3(rand()%50 - 25,rand()%50 - 25,rand()%50 - 25));
-		lpts->setColor(glm::vec3(1.0f,1.0f,1.0f));
+		lLight->transform()->setLocalPosition(glm::vec3(rand()%range - range/2,  rand()%3  ,rand()%range - range/2));
+		lpts->setColor(glm::vec3((rand()%100) * 0.01f,(rand()%100) * 0.01f,(rand()%100) * 0.01f));
+		lpts->setIntensity((rand()%100) * 0.01f);
 	}
 
-	lLight = new de::GameObject();
+	/*lLight = new de::GameObject();
 	lLight->addComponent(new de::component::DirectionalLight());
-	lLight->transform()->setRotation(glm::quat(glm::vec3(glm::radians(90.0f), 0, 0)));
+	lLight->transform()->setRotation(glm::quat(glm::vec3(glm::radians(90.0f), 0, 0)));*/
 
 	lAngle = 0;
 }

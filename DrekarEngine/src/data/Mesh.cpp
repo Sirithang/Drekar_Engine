@@ -189,6 +189,8 @@ void Mesh::fromFile(const std::string& pFile)
 				lFile.read((char*)&mUvs[i].x,sizeof(float));
 				lFile.read((char*)&mUvs[i].y,sizeof(float));
 				lFile.read((char*)&temp,sizeof(float));
+
+				int k = 0;
 			}
 
 			if(data&DATA_NORMAL)

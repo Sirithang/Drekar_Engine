@@ -6,6 +6,7 @@
 #include "data/Texture.h"
 
 #include <list>
+#include <cstdint>
 
 namespace de
 {
@@ -18,9 +19,15 @@ namespace de
 	class DE_EXPORT Material : public ILoadableAsset
 	{
 	protected:
+
+		static std::list<int16_t>	sFreeIDs;
+		static int16_t				sIDCounter;
+
 		std::list<int>	mFreeUnit; // count free texture unit
 		
 		Program* mProgram;
+		
+		int16_t mID;
 
 		std::map<std::string, argv::AShaderArg*> mArguments; // list of all user defined argument to pass to shader
 
@@ -29,6 +36,7 @@ namespace de
 	public:
 
 		Material();
+		~Material();
 		
 		void setProgram(Program* pProgram);
 		void addTexture(const std::string& pName, data::Texture* pTexture); 
@@ -36,11 +44,14 @@ namespace de
 		Program* program() const;
 
 		/**
-		* \brief this setup the material (bind program, push texture to it etc...
+		* \brief this setup the material (bind program, push texture to it etc...)
+				 If pForCurrentCam == true (default), it will bind current cam matrix to it too.
 		*/
-		void setup();
+		void setup(bool pForCurrentCam = true);
 
 		void fromFile(const std::string& pFile);
+
+		int16_t getID();
 	};
 
 
@@ -92,6 +103,8 @@ namespace de
 		public:
 			TextureArg(const std::string& pName, int pTextureUnit, data::Texture* pTexture);
 			void upload(Program* pProgram);
+
+			void changeTexture(de::data::Texture* pTex);
 		};
 
 		//----------------------------------------------

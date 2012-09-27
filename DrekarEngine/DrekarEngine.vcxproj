@@ -91,6 +91,7 @@
     <ClCompile Include="src\component\light\PointLight.cpp" />
     <ClCompile Include="src\component\MeshRenderer.cpp" />
     <ClCompile Include="src\component\Transform.cpp" />
+    <ClCompile Include="src\core\ARenderable.cpp" />
     <ClCompile Include="src\core\AScreen.cpp" />
     <ClCompile Include="src\core\ComponentFactory.cpp" />
     <ClCompile Include="src\core\Debug.cpp" />
@@ -121,6 +122,7 @@
     <ClInclude Include="include\component\MeshRenderer.h" />
     <ClInclude Include="include\component\Transform.h" />
     <ClInclude Include=".\include\core\AComponent.h" />
+    <ClInclude Include="include\core\ARenderable.h" />
     <ClInclude Include="include\core\AssetDatabase.h" />
     <ClInclude Include="include\core\ComponentFactory.h" />
     <ClInclude Include="include\core\Debug.h" />

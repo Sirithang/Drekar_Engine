@@ -1,0 +1,7 @@
+{
+	"MeshRenderer" : 
+	{ 	
+		"mesh" : "data/assets/alien/alien.mesh", 
+		"material" : "data/assets/alien/alien.mat" 
+	}
+}
