@@ -10,7 +10,7 @@ layout(location = 2) out vec4 outputDepth;
 
 void main() 
 { 
-   outputColor = vec4(1,1,1,0.1);
+   outputColor = vec4(1,1,1,0);
    outputNormal = vec4((theNormal + 1) * 0.5, 0);
    outputDepth.r = theDepth.x / theDepth.y;
 }

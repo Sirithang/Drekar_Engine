@@ -21,6 +21,8 @@ void MyScreen::init()
 {
 	srand(time(NULL));
 
+	pressed = false;
+
 	InputManager::addInputSource(new io::KeyboardInput("Keyboard"));
 	InputManager::addInputSource(new io::MouseInput("Mouse"));
 
@@ -53,28 +55,28 @@ void MyScreen::init()
 	
 	de::GameObject* lLight;// = new de::GameObject();
 
-	const int range = 100;
+	const int range = 200;
 
 	de::GameObject* parentObj = new de::GameObject("ParentGameObject");
 	parentObj->transform()->setPosition(glm::vec3(100, 0, 100));
 	lLightObjs.push_back(parentObj);
 
-	for(int i = 0; i < 2; i++)
+	for(int i = 0; i < 100; i++)
 	{
 		lLight = new de::GameObject();
 
 		lLight->transform()->setParent(parentObj->transform());
 
 		de::component::PointLight* lpts = (de::component::PointLight*)lLight->addComponent(new de::component::PointLight());
-		lLight->transform()->setLocalPosition(glm::vec3(rand()%range - range/2,  rand()%3  ,rand()%range - range/2));
+		lLight->transform()->setLocalPosition(glm::vec3(rand()%range - range/2,  rand()%10  ,rand()%range - range/2));
 		lpts->setColor(glm::vec3((rand()%100) * 0.01f,(rand()%100) * 0.01f,(rand()%100) * 0.01f));
 		lpts->setIntensity((rand()%100) * 0.01f);
 	}
 
-	/*lLight = new de::GameObject();
+	lLight = new de::GameObject();
 	Light* compLight = (Light*)lLight->addComponent(new de::component::DirectionalLight());
-	compLight->setColor(glm::vec3(1.0, 1.0, 1.0));
-	lLight->transform()->setRotation(glm::quat(glm::vec3(glm::radians(45.0f), 0, 0)));*/
+	compLight->setColor(glm::vec3(0.01f, 0.01f, 0.01f));
+	lLight->transform()->setRotation(glm::quat(glm::vec3(glm::radians(45.0f), 0, 0)));
 
 	GameObject* terrainObj = new GameObject("terrain");
 	terrainObj->fromAsset("data/assets/terrain/terrain.asset");
@@ -98,6 +100,14 @@ void MyScreen::update()
 	{
 		lAngle += 0.6f * de::GameTime::deltaTime();
 	}
+
+	if(input->getAxis("F1") > 0.2f && !pressed)
+	{
+		AssetDatabase::reload<Material>("data/internals/lights/point/PointLight.mat");
+		pressed = true;
+	}
+	else
+		pressed = false;
 
 	std::list<de::GameObject*>::iterator lIt = lLightObjs.begin();
 

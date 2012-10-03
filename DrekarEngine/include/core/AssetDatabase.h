@@ -3,8 +3,12 @@
 
 #include "export.h"
 
+#include "core/Debug.h"
+
 #include <string>
 #include <map>
+
+#include <typeinfo>
 
 namespace de
 {
@@ -23,27 +27,30 @@ namespace de
 	//-----------------------------------
 
 	/**
-	* \brief this templated class allow to load an asset only once. If the asset is already loaded, it return a pointer to it.
+	* \brief this class allow to load an asset only once. If the asset is already loaded, it return a pointer to it.
 	*		 NOTE :Never delete an asset loaded throught the database. Instead "unload" it.
 	*/
-	template <class T>
-	class AssetDatabase
+	class DE_EXPORT AssetDatabase
 	{
 	protected:
 
-		template <class T>
 		struct CountedAsset
 		{
 			int count;
-			T*	asset;
+			ILoadableAsset*	asset;
 		};
 
-		static AssetDatabase* sInstance;
+		static AssetDatabase sInstance;
 
-		std::map<std::string, CountedAsset<T> > mAssets;
+		std::map<std::string, CountedAsset> mAssets;
+
+		AssetDatabase();
 
 	public:
+		template <class T>
 		static T*	load(const std::string& pPath);
+		template <class T>
+		static T*	reload(const std::string& pPath);
 		static void	unload(ILoadableAsset* pAsset);
 	};
 
@@ -51,41 +58,35 @@ namespace de
 	//****** IMPLEMENTATION
 
 	template <class T>
-	AssetDatabase<T>*	AssetDatabase<T>::sInstance = new AssetDatabase<T>();
-
-	//-------
-
-	template <class T>
-	T* AssetDatabase<T>::load(const std::string& pPath)
+	T* AssetDatabase::load(const std::string& pPath)
 	{
-		if(sInstance->mAssets.count(pPath) == 0)
+		if(sInstance.mAssets.count(pPath) == 0)
 		{
 			ILoadableAsset* p = (ILoadableAsset*)new T();
 			p->fromFile(pPath);
 
-			sInstance->mAssets[pPath].count = 1;
-			sInstance->mAssets[pPath].asset = (T*)p;
+			sInstance.mAssets[pPath].count = 1;
+			sInstance.mAssets[pPath].asset = p;
 		}
 		else
 		{
-			sInstance->mAssets[pPath].count += 1;
+			sInstance.mAssets[pPath].count += 1;
 		}
 
-		return sInstance->mAssets[pPath].asset;
+		return (T*)sInstance.mAssets[pPath].asset;
 	}
 
 	//-------
 
 	template <class T>
-	void AssetDatabase<T>::unload(ILoadableAsset* pAsset)
+	T* AssetDatabase::reload(const std::string& pPath)
 	{
-		if(sInstance->mAssets.count(pAsset->path) > 0)
-		{
-			sInstance->mAssets[pAsset->path].count -= 1;
+		if(sInstance.mAssets.count(pPath) == 0)
+			return nullptr;
 
-			if(sInstance->mAssets[pAsset->path].count <= 0)
-				delete sInstance->mAssets[pAsset->path].asset;
-		}
+		sInstance.mAssets[pPath].asset->fromFile(pPath);
+
+		return (T*)sInstance.mAssets[pPath].asset;
 	}
 }
 

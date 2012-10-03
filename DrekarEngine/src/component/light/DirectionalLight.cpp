@@ -18,7 +18,7 @@ DirectionalLight::DirectionalLight()
 {
 	if(sDiretionalLightMat == nullptr)
 	{
-		sDiretionalLightMat = AssetDatabase<Material>::load("data/internals/lights/directional/DirectionalLight.mat");
+		sDiretionalLightMat = AssetDatabase::load<Material>("data/internals/lights/directional/DirectionalLight.mat");
 	}
 }
 

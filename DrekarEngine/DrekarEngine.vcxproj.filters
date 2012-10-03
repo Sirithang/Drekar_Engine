@@ -144,6 +144,9 @@
     <ClCompile Include=".\src\data\HeightmapInfo.cpp">
       <Filter>Source Files\Data</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\AssetDatabase.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\export.h">
@@ -241,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="include\data\HeightmapInfo.h">
       <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\CommonDatabase.h">
+      <Filter>Header Files\core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

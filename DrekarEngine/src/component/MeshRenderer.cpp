@@ -85,11 +85,11 @@ void MeshRenderer::fromJSON(const std::string& pData)
 
 			if(type == "mesh")
 			{
-				mMesh = AssetDatabase<data::Mesh>::load(data);
+				mMesh = AssetDatabase::load<data::Mesh>(data);
 			}
 			else if(type == "material")
 			{
-				mMaterial = AssetDatabase<Material>::load(data);
+				mMaterial = AssetDatabase::load<Material>(data);
 			}
 		}
 	}

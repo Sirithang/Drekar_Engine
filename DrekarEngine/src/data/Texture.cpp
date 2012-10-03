@@ -4,6 +4,7 @@ using namespace de::data;
 
 Texture::Texture()
 {
+	mID = -1;
 }
 
 //------------------------------
@@ -17,7 +18,11 @@ Texture::~Texture()
 
 void Texture::create(unsigned int pWidth, unsigned int pHeight)
 {
-	glGenTextures(1, &mID);
+	if(mID == -1)
+	{
+		glGenTextures(1, &mID);
+	}
+	
 	glBindTexture(GL_TEXTURE_2D, mID);
 
 	mWidth = pWidth;

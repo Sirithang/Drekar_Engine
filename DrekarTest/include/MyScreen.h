@@ -23,7 +23,8 @@ protected:
 	std::list<de::GameObject*> lLightObjs;
 	std::list<de::GameObject*> lObject;
 
-	float lAngle;
+	float	lAngle;
+	bool	pressed;
 
 public:
 	void init();

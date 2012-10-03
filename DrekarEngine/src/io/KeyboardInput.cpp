@@ -164,6 +164,7 @@ KeyboardInput::KeyboardInput(const std::string& pName)
 		k.ID = enumID[i];
 
 		mAxis[k.name] = 0;
+		mSpecialKeys.push_back(k);
 	}
 }
 
@@ -198,5 +199,7 @@ void KeyboardInput::update()
 		{
 			mAxis[it->name] = 0.0f;
 		}
+
+		it++;
 	}
 }

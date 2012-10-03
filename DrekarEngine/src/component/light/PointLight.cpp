@@ -16,8 +16,8 @@ PointLight::PointLight()
 {
 	if(sPointLightMaterial == nullptr)
 	{
-		sPointLightMaterial = AssetDatabase<Material>::load("data/internals/lights/point/PointLight.mat");
-		sMesh = AssetDatabase<data::Mesh>::load("data/internals/lights/point/sphere.mesh");
+		sPointLightMaterial = AssetDatabase::load<Material>("data/internals/lights/point/PointLight.mat");
+		sMesh = AssetDatabase::load<data::Mesh>("data/internals/lights/point/sphere.mesh");
 	}
 }
 

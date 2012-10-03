@@ -143,6 +143,12 @@ void Material::fromFile(const std::string& pFile)
 	data::Shader* shader[3];
 	int current = 0;
 	memset(shader, 0, 3 * sizeof(data::Shader*));
+
+	if(mProgram != nullptr)
+	{
+		delete mProgram;
+		mProgram = nullptr;
+	}
 	
 	int i = 0;
 	while(tokens[i].start != -1)

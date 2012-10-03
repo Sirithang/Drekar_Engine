@@ -63,7 +63,7 @@ void HeightmapRenderer::fromJSON(const std::string& pData)
 				i++;
 				std::string data = std::string(pData, tokens[i].start, tokens[i].end - tokens[i].start);
 
-				mMaterial = AssetDatabase<Material>::load(data);
+				mMaterial = AssetDatabase::load<Material>(data);
 			}
 		}
 

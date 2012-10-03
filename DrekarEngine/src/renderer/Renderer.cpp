@@ -34,6 +34,8 @@ Renderer::Renderer()
 	buildClearMat();
 	buildLightBufferMat();
 	buildCombineMat();
+
+	glBlendFunc (GL_ONE, GL_ONE);
 }
 
 //---------------------------
@@ -94,6 +96,7 @@ Renderer* Renderer::current()
 void Renderer::setAmbient(const glm::vec3& pAmbientColor)
 {
 	mAmbient = pAmbientColor;
+	glClearColor(mAmbient.r, mAmbient.g, mAmbient.b, 0.0);
 }
 
 //--------------------------
@@ -164,9 +167,7 @@ void Renderer::render()
 	glEnable(GL_CULL_FACE);
 
 	glEnable(GL_BLEND);
-	glBlendFunc (GL_ONE, GL_ONE);
 
-	glClearColor(mAmbient.r, mAmbient.g, mAmbient.b, 0.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 
@@ -180,6 +181,7 @@ void Renderer::render()
 		if(itLight->first != previousLightType)
 		{
 			itLight->second->setupLightType(mAlbedo, mNormal, mDepth);
+			previousLightType = itLight->first;
 		}
 
 		itLight->second->setup();
