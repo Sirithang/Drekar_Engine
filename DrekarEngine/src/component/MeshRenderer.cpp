@@ -69,7 +69,7 @@ void MeshRenderer::fromJSON(const std::string& pData)
 
 	if(r != JSMN_SUCCESS )
 	{
-		Debug::Log(std::string("Erreur parson JSON for meshRender : ")+pData+" \n");
+		Debug::Log(std::string("Erreur parson JSON for HeightmapRender : ")+pData+" \n");
 		return;
 	}
 

@@ -48,6 +48,8 @@ namespace de
 			void setup();
 			void render();
 
+			void setAmbient(const glm::vec3& pAmbientColor);
+
 			static Renderer* current();
 		};
 	}

@@ -86,6 +86,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\component\Camera.cpp" />
+    <ClCompile Include="src\component\HeightmapRenderer.cpp" />
     <ClCompile Include="src\component\light\DirectionalLight.cpp" />
     <ClCompile Include="src\component\light\Light.cpp" />
     <ClCompile Include="src\component\light\PointLight.cpp" />
@@ -105,6 +106,7 @@
     <ClCompile Include="src\core\Program.cpp" />
     <ClCompile Include=".\src\core\AComponent.cpp" />
     <ClCompile Include="src\core\RenderBuffer.cpp" />
+    <ClCompile Include=".\src\data\HeightmapInfo.cpp" />
     <ClCompile Include="src\data\Shader.cpp" />
     <ClCompile Include="src\data\Texture.cpp" />
     <ClCompile Include="src\data\Texture2D.cpp" />
@@ -116,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\component\Camera.h" />
+    <ClInclude Include="include\component\HeightmapRenderer.h" />
     <ClInclude Include="include\component\light\DirectionalLight.h" />
     <ClInclude Include="include\component\light\Light.h" />
     <ClInclude Include="include\component\light\PointLight.h" />
@@ -135,6 +138,7 @@
     <ClInclude Include="include\core\Material.h" />
     <ClInclude Include="include\core\Program.h" />
     <ClInclude Include="include\core\RenderBuffer.h" />
+    <ClInclude Include="include\data\HeightmapInfo.h" />
     <ClInclude Include="include\data\Mesh.h" />
     <ClInclude Include="include\data\Shader.h" />
     <ClInclude Include="include\data\Texture.h" />

@@ -24,11 +24,13 @@ void MyScreen::init()
 	InputManager::addInputSource(new io::KeyboardInput("Keyboard"));
 	InputManager::addInputSource(new io::MouseInput("Mouse"));
 
+	renderer::Renderer::current()->setAmbient(glm::vec3(0.1, 0.1, 0.1));
+
 	//--------------------- Create field of object
 
-	for(int i = -5; i <= 5; i++)
+	/*for(int i = 0; i <= 10; i++)
 	{
-		for(int j = -5; j <= 5; j++)
+		for(int j = 0; j <= 10; j++)
 		{
 			GameObject* obj = new GameObject();
 
@@ -36,29 +38,31 @@ void MyScreen::init()
 
 			obj->transform()->setPosition(glm::vec3(i*8, 0, j*8));
 		}
-	}
+	}*/
 
 	//--------------------- Camera
 
 	Camera* cam = (Camera*)lCam.addComponent(new Camera());
 	cam->setClipPlane(glm::vec2(0.1f, 1000.0f));
-	lCam.transform()->setPosition(glm::vec3(0, 80, -70));
+	lCam.transform()->setPosition(glm::vec3(50, 50, 50));
 	lCam.transform()->setRotation(glm::quat(glm::vec3(45, 0, 0)));
 
 	lCam.addComponent(new CameraMover());
 
 	//--------------------- ADD A LIGHTS
 	
-	de::GameObject* lLight = new de::GameObject();
+	de::GameObject* lLight;// = new de::GameObject();
 
 	const int range = 100;
 
-	for(int i = 0; i < 20; i++)
+	de::GameObject* parentObj = new de::GameObject("ParentGameObject");
+	parentObj->transform()->setPosition(glm::vec3(100, 0, 100));
+	lLightObjs.push_back(parentObj);
+
+	for(int i = 0; i < 2; i++)
 	{
-		de::GameObject* parentObj = new de::GameObject("ParentGameObject");
 		lLight = new de::GameObject();
 
-		lLightObjs.push_back(parentObj);
 		lLight->transform()->setParent(parentObj->transform());
 
 		de::component::PointLight* lpts = (de::component::PointLight*)lLight->addComponent(new de::component::PointLight());
@@ -68,8 +72,12 @@ void MyScreen::init()
 	}
 
 	/*lLight = new de::GameObject();
-	lLight->addComponent(new de::component::DirectionalLight());
-	lLight->transform()->setRotation(glm::quat(glm::vec3(glm::radians(90.0f), 0, 0)));*/
+	Light* compLight = (Light*)lLight->addComponent(new de::component::DirectionalLight());
+	compLight->setColor(glm::vec3(1.0, 1.0, 1.0));
+	lLight->transform()->setRotation(glm::quat(glm::vec3(glm::radians(45.0f), 0, 0)));*/
+
+	GameObject* terrainObj = new GameObject("terrain");
+	terrainObj->fromAsset("data/assets/terrain/terrain.asset");
 
 	lAngle = 0;
 }

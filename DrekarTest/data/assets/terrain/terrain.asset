@@ -1,0 +1,15 @@
+{
+	"HeightmapRenderer" : 
+	{ 	
+		"material" : "data/materials/diffuse.mat",
+		"info" :
+		{
+			"width" : 200,
+			"height" : 10,
+			"depth" : 200,
+			"heightmapWidth" : 257,
+			"heightmapHeight" : 257,
+			"heightmap" : "data/assets/terrain/height.raw"
+		}
+	}
+}

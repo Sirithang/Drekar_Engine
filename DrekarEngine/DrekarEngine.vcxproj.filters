@@ -138,6 +138,12 @@
     <ClCompile Include="src\core\ARenderable.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
+    <ClCompile Include="src\component\HeightmapRenderer.cpp">
+      <Filter>Source Files\component</Filter>
+    </ClCompile>
+    <ClCompile Include=".\src\data\HeightmapInfo.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\export.h">
@@ -229,6 +235,12 @@
     </ClInclude>
     <ClInclude Include="include\core\ARenderable.h">
       <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\component\HeightmapRenderer.h">
+      <Filter>Header Files\component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\data\HeightmapInfo.h">
+      <Filter>Header Files\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

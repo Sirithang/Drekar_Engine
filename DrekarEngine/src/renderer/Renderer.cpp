@@ -91,6 +91,13 @@ Renderer* Renderer::current()
 
 //--------------------------
 
+void Renderer::setAmbient(const glm::vec3& pAmbientColor)
+{
+	mAmbient = pAmbientColor;
+}
+
+//--------------------------
+
 void Renderer::setup()
 {
 	sCurrent = this;
@@ -152,8 +159,9 @@ void Renderer::render()
 
 	///------ LIGHT BUFFER
 	mLightBuffer.bind();
+
 	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);
 
 	glEnable(GL_BLEND);
 	glBlendFunc (GL_ONE, GL_ONE);
@@ -180,7 +188,7 @@ void Renderer::render()
 
 	glDisable(GL_BLEND);
 	glEnable(GL_DEPTH_TEST);
-	//glEnable(GL_CULL_FACE);
+	glDisable(GL_CULL_FACE);
 
 	mLightBuffer.unbind();
 

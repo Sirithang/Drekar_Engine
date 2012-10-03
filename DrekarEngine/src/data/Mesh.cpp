@@ -29,7 +29,7 @@ Mesh::~Mesh()
 void Mesh::setVertex(glm::vec3* pVertex, unsigned int pNb)
 {
 	if(mVertex != nullptr)
-		delete mVertex;
+		delete[] mVertex;
 
 	mNbVertex = pNb;
 
@@ -46,7 +46,7 @@ void Mesh::setVertex(glm::vec3* pVertex, unsigned int pNb)
 void Mesh::setUV(glm::vec2* pUV)
 {
 	if(mUvs != nullptr)
-		delete mUvs;
+		delete[] mUvs;
 
 	mUvs = new glm::vec2[mNbVertex];
 
@@ -61,7 +61,7 @@ void Mesh::setUV(glm::vec2* pUV)
 void Mesh::setNormal(glm::vec3* pNormal)
 {
 	if(mNormals != nullptr)
-		delete mUvs;
+		delete[] mNormals;
 
 	mNormals = new glm::vec3[mNbVertex];
 
@@ -76,7 +76,7 @@ void Mesh::setNormal(glm::vec3* pNormal)
 void Mesh::setTriangles(int* pTriangle, unsigned int pNumber)
 {
 	if(mTriangles != nullptr)
-		delete mTriangles;
+		delete[] mTriangles;
 
 	mNbTriangles = pNumber;
 	

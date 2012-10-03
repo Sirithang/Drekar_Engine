@@ -1,0 +1,4 @@
+{
+	"vertex" : "data/diffuse.vert",
+	"fragment" : "data/diffuse.frag",
+}
