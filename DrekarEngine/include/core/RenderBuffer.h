@@ -26,9 +26,15 @@ namespace de
 		RenderBuffer();
 		~RenderBuffer();
 
-		void init(unsigned int pWidth, unsigned int pHeight);
+		/**
+		* \brief if pCreateDefault is true, we create a default color attachement and a defaut depth renderbuffer
+		*/
+		void init(unsigned int pWidth, unsigned int pHeight, bool pCreateDefault = true);
 
-		void addTexture(data::Texture* pTexture);
+		/**
+		* \brief pAttachement is the OpenGL enum that definie the attachement.
+		*/
+		void addTexture(data::Texture* pTexture, GLint pAttachement = -1);
 
 		void bind()		const;
 		void unbind()	const;

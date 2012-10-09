@@ -33,12 +33,19 @@ void Texture::create(unsigned int pWidth, unsigned int pHeight)
 
 void Texture::init(GLint pInternalFormat, GLint pFormat, GLint pDataFormat)
 {
-	
+	glBindTexture(GL_TEXTURE_2D, mID);
 	glTexImage2D(GL_TEXTURE_2D, 0, pInternalFormat, mWidth, mHeight, 0, pFormat, pDataFormat, 0);
 
 	//--- by default we set nearest filtering, to accomodate easily with RT
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+}
+
+//------------------------------
+
+void Texture::setParameter(GLuint pParameter, GLuint pValue)
+{
+	glTexParameteri(GL_TEXTURE_2D, pParameter, pValue);
 }
 
 //------------------------------

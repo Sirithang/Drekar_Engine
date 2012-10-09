@@ -4,10 +4,12 @@ uniform sampler2D _Albedo;
 uniform sampler2D _Normal;
 uniform sampler2D _Depth;
 
-uniform mat4	_InvertP;
+uniform mat4	_InvertVP;
 uniform vec4	_LightPos;
 uniform vec4	_LightColor;
 uniform float	_Radius;
+
+uniform vec4	_CamPos;
 
 smooth in vec4 texcoord;
 
@@ -29,14 +31,14 @@ void main()
 	position.z = depth;
 	position.w = 1.0f;
 
-	position = _InvertP * position;
+	position = _InvertVP * position;
 	position.xyz /= position.w;
 
 	vec3 lightDir = _LightPos.xyz - position.xyz;
 	vec3 nLightDir = normalize(lightDir);
 
 	vec3 reflectionVector = normalize(reflect(-nLightDir, normal.xyz));
-	vec3 pixelToCam = normalize(-position.xyz);
+	vec3 pixelToCam = normalize(_CamPos.xyz-position.xyz);
 
 	float attenuation = clamp(1.0 - length(lightDir)/_Radius, 0.0, 1.0); 
 	float spec =  specIntensity * pow( clamp(dot(reflectionVector, pixelToCam), 0.0, 1.0), normal.w);

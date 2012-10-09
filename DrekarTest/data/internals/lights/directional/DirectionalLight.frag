@@ -4,9 +4,14 @@ uniform sampler2D _Albedo;
 uniform sampler2D _Normal;
 uniform sampler2D _Depth;
 
-uniform mat4 _InvertP;
+uniform sampler2D _ShadowMap;
+
+uniform mat4 _InvertVP;
 uniform vec4 _LightDirection;
 uniform vec4 _LightColor;
+uniform vec4 _CamPos;
+
+uniform mat4 _VPLight;
 
 smooth in vec2 texcoord;
 
@@ -20,20 +25,33 @@ void main()
 
 	float depth = texture2D(_Depth, texcoord).r;
 
+	vec4 position;
+	position.x = texcoord.x * 2.0f - 1.0f;
+	position.y = texcoord.y * 2.0f - 1.0f;
+	position.z = depth;
+	position.w = 1.0f;
 
-	 vec4 position;
-	 position.x = texcoord.x * 2.0f - 1.0f;
-	 position.y = texcoord.y * 2.0f - 1.0f;
-	 position.z = depth;
-	 position.w = 1.0f;
+	position = _InvertVP * position;
+	position.xyz /= position.w;
 
-	 position = _InvertP * position;
-	 position.xyz /= position.w;
+	//Compute position in Light Clip space
 
-	 vec3 reflectionVector = normalize(reflect(_LightDirection.xyz, normal.xyz)).xyz;
-	 vec3 pixelToCam = normalize(-position.xyz);
+	vec4 lightPix = _VPLight * vec4(position.xyz, 1.0);
+	vec2 lightTex = ((lightPix.xy/lightPix.w) + 1) * 0.5;
 
-	 float spec =  specIntensity * pow( clamp(dot(reflectionVector, pixelToCam), 0.0, 1.0), normal.w);
+	float pixDepth = lightPix.z/lightPix.w;
+	float lightDepth = texture2D(_ShadowMap, lightTex.xy).x;
 
-	outputColor = vec4(_LightColor.xyz * max(0.0, dot(unpacked, -_LightDirection.xyz)), spec);
+	float visibility = 1.0;
+	if(pixDepth < lightDepth)
+	{
+		visibility = 0.0f;
+	}
+
+	vec3 reflectionVector = normalize(reflect(_LightDirection.xyz, normal.xyz)).xyz;
+	vec3 pixelToCam = normalize(_CamPos.xyz-position.xyz);
+
+	float spec =  specIntensity * pow( clamp(dot(reflectionVector, pixelToCam), 0.0, 1.0), normal.w);
+
+	outputColor = vec4(_LightColor.xyz * max(0.0, dot(unpacked, -_LightDirection.xyz)) + visibility * vec3(1,0,0), spec);
 }

@@ -1,11 +1,11 @@
 {
 	"HeightmapRenderer" : 
 	{ 	
-		"material" : "data/materials/diffuse.mat",
+		"material" : "data/assets/terrain/terrain.mat",
 		"info" :
 		{
 			"width" : 200,
-			"height" : 10,
+			"height" : 5,
 			"depth" : 200,
 			"heightmapWidth" : 257,
 			"heightmapHeight" : 257,

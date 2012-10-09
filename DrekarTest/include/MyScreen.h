@@ -19,11 +19,13 @@ protected:
 	de::data::Mesh lMesh;
 
 	de::GameObject lCam;
+	de::GameObject* mLight;
 
 	std::list<de::GameObject*> lLightObjs;
 	std::list<de::GameObject*> lObject;
 
 	float	lAngle;
+	float	lOrien;
 	bool	pressed;
 
 public:

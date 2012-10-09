@@ -36,6 +36,8 @@ namespace de
 			GLuint		 ID() const;
 
 			void bind(int pTextureUnit) const;
+
+			void setParameter(GLuint pParameter, GLuint pValue);
 		};
 	}
 }

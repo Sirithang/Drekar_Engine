@@ -17,7 +17,10 @@ void Camera::init()
 	mAspect = 4.0f/3.0f;
 	mClipPlanes = glm::vec2(0.01f, 100.0f);
 
-	mRecomputeProjecton = false;
+	mRecomputeProjection = false;
+	mIsOrtho = false;
+
+	mReplacementMaterial = nullptr;
 
 	computeProjection();
 }
@@ -46,7 +49,14 @@ float Camera::fov() const
 
 void Camera::computeProjection()
 {
-	mProjection = glm::perspective(mFov, mAspect, mClipPlanes.x, mClipPlanes.y);
+	if(mIsOrtho)
+	{
+		mProjection = glm::ortho(-mOrthoHalfSize, mOrthoHalfSize, -(mOrthoHalfSize * mAspect), mOrthoHalfSize * mAspect, mClipPlanes.x, mClipPlanes.y);
+	}
+	else
+	{
+		mProjection = glm::perspective(mFov, mAspect, mClipPlanes.x, mClipPlanes.y);
+	}
 }
 
 //-------------------------------
@@ -54,7 +64,7 @@ void Camera::computeProjection()
 void Camera::setFov(float pFov)
 {
 	mFov = pFov;
-	mRecomputeProjecton = true;
+	mRecomputeProjection = true;
 }
 
 //-----------------------------
@@ -62,7 +72,7 @@ void Camera::setFov(float pFov)
 void Camera::setAspect(float pAspect)
 {
 	mAspect = pAspect;
-	mRecomputeProjecton = true;
+	mRecomputeProjection = true;
 }
 
 //----------------------------
@@ -70,13 +80,51 @@ void Camera::setAspect(float pAspect)
 void Camera::setClipPlane(glm::vec2& pClipPlane)
 {
 	mClipPlanes = pClipPlane;
-	mRecomputeProjecton = true;
+	mRecomputeProjection = true;
+}
+
+//---------------------------
+
+void Camera::setOrtho(bool pOrtho)
+{
+	mIsOrtho = pOrtho;
+
+	mRecomputeProjection = true;
+}
+
+//---------------------------
+
+void Camera::setOrthoHalfSize(float pHalfSize)
+{
+	mOrthoHalfSize = pHalfSize;
+
+	mRecomputeProjection = true;
+}
+
+//---------------------------
+
+void Camera::setReplacementMaterial(de::Material* pMaterial)
+{
+	mReplacementMaterial = pMaterial;
+}
+
+//---------------------------
+
+de::Material* Camera::replacementMaterial() const
+{
+	return mReplacementMaterial;
 }
 
 //---------------------------
 
 const glm::mat4& Camera::projectionMatrix()
 {
+	if(mRecomputeProjection)
+	{
+		computeProjection();
+		mRecomputeProjection = false;
+	}
+
 	return mProjection;
 }
 
@@ -106,9 +154,14 @@ Camera* Camera::current()
 void Camera::setup()
 {
 	sCurrent = this;
-	if(mRecomputeProjecton)
+	if(mRecomputeProjection)
 	{
 		computeProjection();
-		mRecomputeProjecton = false;
+		mRecomputeProjection = false;
+	}
+
+	if(mReplacementMaterial != nullptr)
+	{
+		mReplacementMaterial->setup();
 	}
 }

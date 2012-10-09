@@ -1,0 +1,4 @@
+{
+	"vertex" 	: "data/internals/depthOnly/depth.vert",
+	"fragment" 	: "data/internals/depthOnly/depth.frag"
+}

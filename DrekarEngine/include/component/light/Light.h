@@ -4,7 +4,7 @@
 #include "export.h"
 #include "core/AComponent.h"
 #include "data/Mesh.h"
-#include "data/Texture.h"
+#include "data/Texture2D.h"
 #include "core/Program.h"
 
 #include <map>
@@ -64,6 +64,11 @@ namespace de
 			* \brief this fonction pass the different information usefull to the shader, according to the light type
 			*/
 			virtual void setup() = 0;
+
+			/**
+			* \brief this functon will be called when the shadowmap is needed to be computed for this light.
+			*/
+			virtual void renderShadowmap() = 0;
 		};
 	}
 }

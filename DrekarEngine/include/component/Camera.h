@@ -3,6 +3,7 @@
 
 #include "core/AComponent.h"
 #include "core/ComponentFactory.h"
+#include "core/Material.h"
 #include <list>
 #include <glm/glm.hpp>
 
@@ -25,7 +26,12 @@ namespace de
 			float		mAspect;
 			glm::vec2	mClipPlanes;
 
-			bool		mRecomputeProjecton;
+			bool		mIsOrtho;
+			float		mOrthoHalfSize;
+
+			bool		mRecomputeProjection;
+
+			Material*	mReplacementMaterial;
 
 			void computeProjection();
 
@@ -40,8 +46,14 @@ namespace de
 			void setFov(float pFov);
 			void setAspect(float pAspect);
 			void setClipPlane(glm::vec2& pClipPlane);
+			void setOrtho(bool pOrtho);
+			void setOrthoHalfSize(float pHalfSize);
 
-			float fov() const;
+			void setReplacementMaterial(Material* pMaterial);
+
+			float		fov() const;
+			bool		ortho() const;
+			Material*	replacementMaterial() const;
 
 			//-----------------
 
@@ -50,7 +62,7 @@ namespace de
 
 			void setup();
 
-			//**
+			//******************
 
 			static const std::list<Camera*>& cameraList();
 			static Camera* current();

@@ -11,10 +11,14 @@ layout (location = 2) in vec2 inUV;
 smooth out vec3 theNormal;
 smooth out vec2 theUv;
 smooth out vec2 theDepth;
+smooth out float slope;
 
 void main() 
 { 
-	gl_Position = MATRIX_P * MATRIX_V * MATRIX_M * vec4(inPosition, 1.0);
+	mat4 MVP = MATRIX_P * MATRIX_V * MATRIX_M;
+	gl_Position = MVP * vec4(inPosition, 1.0);
+
+	slope = clamp(abs(dot(inNormal.xyz, vec3(0,1,0))), 0.0, 1.0);
 
 	theNormal = (inverse(transpose(MATRIX_M)) * vec4(inNormal.xyz, 0.0)).xyz;
 

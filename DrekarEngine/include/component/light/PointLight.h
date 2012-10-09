@@ -28,6 +28,8 @@ namespace de
 			void setupLightType(de::data::Texture* pAlbedo, de::data::Texture* pNormal, de::data::Texture* pDepth);
 
 			float range() const;
+
+			void renderShadowmap();
 		};
 	}
 }

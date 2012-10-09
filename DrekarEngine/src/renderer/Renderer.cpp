@@ -108,9 +108,41 @@ void Renderer::setup()
 
 //--------------------------
 
+void Renderer::sortRenderList()
+{
+	//---------list buding
+
+	mOrderedList.clear();
+
+	std::list<ARenderable*> renderabeList = ARenderable::getRenderables();
+
+	std::list<ARenderable*>::iterator lIt = renderabeList.begin();
+
+	if(component::Camera::current()->replacementMaterial() == nullptr)
+	{
+		while(lIt != renderabeList.end())
+		{//building the ordered map, ordered by the key (containing material and other infos)
+			mOrderedList.insert(std::pair<uint32_t, ARenderable*>((*lIt)->getKey(), (*lIt)));
+			lIt++;
+		}
+	}
+	else
+	{
+		uint32_t key = 0;
+		key |= (uint32_t)component::Camera::current()->replacementMaterial()->getID();
+
+		while(lIt != renderabeList.end())
+		{//building the ordered map, ordered by the key (containing material and other infos)
+			mOrderedList.insert(std::pair<uint32_t, ARenderable*>(key, (*lIt)));
+			lIt++;
+		}
+	}
+}
+
+//-------------------------
+
 void Renderer::render()
 {
-
 	//------------------GBUFFER
 	mRenderBuffer.bind();
 
@@ -122,45 +154,26 @@ void Renderer::render()
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 
-
-	//---------list buding
-
-	std::list<ARenderable*> renderabeList = ARenderable::getRenderables();
-
-	typedef std::multimap<uint32_t, ARenderable*>  multimap_renderer;
-	multimap_renderer orderedList;
-
-	std::list<ARenderable*>::iterator lIt = renderabeList.begin();
-
-	while(lIt != renderabeList.end())
-	{//building the ordered map, ordered by the key (containing material and other infos)
-		orderedList.insert(std::pair<uint32_t, ARenderable*>((*lIt)->getKey(), (*lIt)));
-		lIt++;
-	}
-
-	//--------------------
-
-	uint16_t lastMatID = 0;
-
-	multimap_renderer::iterator itRendederer = orderedList.begin();
-	while(itRendederer != orderedList.end())
-	{
-		uint32_t key = itRendederer->first;
-		uint16_t materialID = key & 0x0000FFFF;
-
-		if(materialID != lastMatID)
-		{
-			lastMatID = materialID;
-			itRendederer->second->setup();
-		}
-
-		itRendederer->second->render();
-		itRendederer++;
-	}
+	sortRenderList();
+	renderOpaque();
 
 	mRenderBuffer.unbind();
 
 	///------ LIGHT BUFFER
+	
+	component::Light::multimap_t mapLight = component::Light::getLights();
+
+	component::Light::multimap_t::iterator itLight = mapLight.begin();
+
+	//**Render shadowmap
+
+	while(itLight != mapLight.end())
+	{
+		itLight->second->renderShadowmap();
+		itLight++;
+	}
+
+	//**Render lightbuffer
 	mLightBuffer.bind();
 
 	glDisable(GL_DEPTH_TEST);
@@ -170,10 +183,7 @@ void Renderer::render()
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
-
-	component::Light::multimap_t mapLight = component::Light::getLights();
-
-	component::Light::multimap_t::iterator itLight = mapLight.begin();
+	itLight = mapLight.begin();
 
 	unsigned char previousLightType = 0;
 	while(itLight != mapLight.end())
@@ -200,3 +210,26 @@ void Renderer::render()
 }
 
 //------------------------
+
+void Renderer::renderOpaque()
+{
+	//------ render opaque geometry -----
+
+	uint16_t lastMatID = 0;
+
+	multimap_renderer::iterator itRendederer = mOrderedList.begin();
+	while(itRendederer != mOrderedList.end())
+	{
+		uint32_t key = itRendederer->first;
+		uint16_t materialID = key & 0x0000FFFF;
+
+		if(materialID != lastMatID)
+		{
+			lastMatID = materialID;
+			Material::getMaterialFromID(materialID)->setup();
+		}
+
+		itRendederer->second->render();
+		itRendederer++;
+	}
+}

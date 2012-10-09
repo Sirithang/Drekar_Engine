@@ -12,6 +12,8 @@ using namespace de;
 std::list<int16_t>	Material::sFreeIDs;
 int16_t				Material::sIDCounter = 0;
 
+std::map<int16_t, Material*> Material::sMaterials;
+
 
 Material::Material()
 {
@@ -27,6 +29,8 @@ Material::Material()
 		sIDCounter++;
 		mID = sIDCounter;
 	}
+
+	sMaterials[mID] = this;
 }
 
 Material::~Material()
@@ -83,7 +87,7 @@ int16_t Material::getID()
 
 //---------------------
 
-void Material::addTexture(const std::string& pName, data::Texture* pTexture)
+void Material::addTexture(const std::string& pName, data::Texture* pTexture, bool pInstantUpload)
 {
 
 	if(mArguments.count(pName) == 0)
@@ -99,6 +103,9 @@ void Material::addTexture(const std::string& pName, data::Texture* pTexture)
 	{
 		((argv::TextureArg*)mArguments[pName])->changeTexture(pTexture);
 	}
+
+	if(pInstantUpload)
+		mArguments[pName]->upload(mProgram);
 }
 
 //----------------------
@@ -223,6 +230,18 @@ void Material::fromFile(const std::string& pFile)
 
 	if(mProgram != nullptr) mProgram->compile();
 }
+
+//----------------------------
+
+Material* Material::getMaterialFromID(uint16_t pID)
+{
+	if(sMaterials.count(pID) == 0)
+		return nullptr;
+
+	return sMaterials[pID];
+}
+
+
 
 //*******************************************************************************
 

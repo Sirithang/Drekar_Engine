@@ -1,0 +1,9 @@
+{
+	"vertex" 	: "data/assets/terrain/terrain.vert",
+	"fragment" 	: "data/assets/terrain/terrain.frag",
+	"textures" : 
+	[ 	
+		{ "_GrassTex" : "data/assets/terrain/grass_terrain.dds"},
+		{ "_RockTex" : "data/assets/terrain/stone_terrain.dds"}
+	]
+}

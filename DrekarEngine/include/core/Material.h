@@ -23,6 +23,8 @@ namespace de
 		static std::list<int16_t>	sFreeIDs;
 		static int16_t				sIDCounter;
 
+		static std::map<int16_t, Material*> sMaterials;
+
 		std::list<int>	mFreeUnit; // count free texture unit
 		
 		Program* mProgram;
@@ -39,7 +41,11 @@ namespace de
 		~Material();
 		
 		void setProgram(Program* pProgram);
-		void addTexture(const std::string& pName, data::Texture* pTexture); 
+
+		/**
+		*	\brief Add or set a texture to this mat. if pInstantUpload == true, it upload to the program the texture immediatly
+		*/
+		void addTexture(const std::string& pName, data::Texture* pTexture, bool pInstantUpload = false); 
 
 		Program* program() const;
 
@@ -52,6 +58,9 @@ namespace de
 		void fromFile(const std::string& pFile);
 
 		int16_t getID();
+
+
+		static Material* getMaterialFromID(uint16_t pID);
 	};
 
 
