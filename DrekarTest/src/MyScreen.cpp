@@ -40,7 +40,8 @@ void MyScreen::init()
 
 			obj->fromAsset("data/assets/alien/alien.asset");
 
-			obj->transform()->setPosition(glm::vec3(i*13, 20, j*13));
+			obj->transform()->setPosition(glm::vec3(i*15, 5, j*15));
+			//obj->transform()->setScale(glm::vec3(0.01f,0.01f,0.01f));
 		}
 	}
 

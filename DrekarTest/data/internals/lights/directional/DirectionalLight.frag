@@ -43,7 +43,7 @@ void main()
 	float lightDepth = texture2D(_ShadowMap, lightTex.xy).x;
 
 	float visibility = 1.0;
-	if(pixDepth < lightDepth)
+	if(pixDepth > (lightDepth * 2.0 - 1))
 	{
 		visibility = 0.0f;
 	}
@@ -53,5 +53,5 @@ void main()
 
 	float spec =  specIntensity * pow( clamp(dot(reflectionVector, pixelToCam), 0.0, 1.0), normal.w);
 
-	outputColor = vec4(_LightColor.xyz * max(0.0, dot(unpacked, -_LightDirection.xyz)) + visibility * vec3(1,0,0), spec);
+	outputColor = vec4(_LightColor.xyz * max(0.0, dot(unpacked, -_LightDirection.xyz)) * visibility, spec);
 }

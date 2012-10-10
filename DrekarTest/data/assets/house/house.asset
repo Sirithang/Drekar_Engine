@@ -1,0 +1,7 @@
+{
+	"MeshRenderer" : 
+	{ 	
+		"mesh" : "data/assets/house/house.mesh", 
+		"material" : "data/materials/diffuse.mat" 
+	}
+}
