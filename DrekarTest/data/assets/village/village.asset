@@ -1,0 +1,79 @@
+{
+	"MeshRenderer" : 
+	{ 	
+		"mesh" : "data/assets/village/meshs/reduced_town.obj_0.mesh", 
+		"material" : "data/materials/diffuse.mat" 
+	},
+
+	"MeshRenderer" : 
+	{ 	
+		"mesh" : "data/assets/village/meshs/reduced_town.obj_1.mesh", 
+		"material" : "data/materials/diffuse.mat" 
+	},
+
+	"MeshRenderer" : 
+	{ 	
+		"mesh" : "data/assets/village/meshs/reduced_town.obj_2.mesh", 
+		"material" : "data/materials/diffuse.mat" 
+	},
+
+	"MeshRenderer" : 
+	{ 	
+		"mesh" : "data/assets/village/meshs/reduced_town.obj_3.mesh", 
+		"material" : "data/materials/diffuse.mat" 
+	},
+
+	"MeshRenderer" : 
+	{ 	
+		"mesh" : "data/assets/village/meshs/reduced_town.obj_4.mesh", 
+		"material" : "data/materials/diffuse.mat" 
+	},
+
+	"MeshRenderer" : 
+	{ 	
+		"mesh" : "data/assets/village/meshs/reduced_town.obj_5.mesh", 
+		"material" : "data/materials/diffuse.mat" 
+	},
+
+	"MeshRenderer" : 
+	{ 	
+		"mesh" : "data/assets/village/meshs/reduced_town.obj_6.mesh", 
+		"material" : "data/materials/diffuse.mat" 
+	},
+
+	"MeshRenderer" : 
+	{ 	
+		"mesh" : "data/assets/village/meshs/reduced_town.obj_7.mesh", 
+		"material" : "data/materials/diffuse.mat" 
+	},
+
+	"MeshRenderer" : 
+	{ 	
+		"mesh" : "data/assets/village/meshs/reduced_town.obj_8.mesh", 
+		"material" : "data/materials/diffuse.mat" 
+	},
+
+	"MeshRenderer" : 
+	{ 	
+		"mesh" : "data/assets/village/meshs/reduced_town.obj_9.mesh", 
+		"material" : "data/materials/diffuse.mat" 
+	},
+
+	"MeshRenderer" : 
+	{ 	
+		"mesh" : "data/assets/village/meshs/reduced_town.obj_10.mesh", 
+		"material" : "data/materials/diffuse.mat" 
+	},
+
+	"MeshRenderer" : 
+	{ 	
+		"mesh" : "data/assets/village/meshs/reduced_town.obj_12.mesh", 
+		"material" : "data/materials/diffuse.mat" 
+	},
+
+	"MeshRenderer" : 
+	{ 	
+		"mesh" : "data/assets/village/meshs/reduced_town.obj_27.mesh", 
+		"material" : "data/materials/diffuse.mat" 
+	}
+}

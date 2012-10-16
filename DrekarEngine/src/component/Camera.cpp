@@ -132,6 +132,7 @@ const glm::mat4& Camera::projectionMatrix()
 
 const glm::mat4& Camera::viewMatrix()
 {
+	update();
 	return mView;
 }
 

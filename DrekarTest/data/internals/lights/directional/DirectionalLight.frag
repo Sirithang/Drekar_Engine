@@ -37,15 +37,17 @@ void main()
 	//Compute position in Light Clip space
 
 	vec4 lightPix = _VPLight * vec4(position.xyz, 1.0);
-	vec2 lightTex = ((lightPix.xy/lightPix.w) + 1) * 0.5;
+	lightPix.xyz /= lightPix.w;
 
-	float pixDepth = lightPix.z/lightPix.w;
-	float lightDepth = texture2D(_ShadowMap, lightTex.xy).x;
+	//vec2 lightTex = (lightPix.xy + 1) * 0.5;
+
+	float pixDepth = lightPix.z;
+	float lightDepth = texture2D(_ShadowMap, lightPix.xy).x;
 
 	float visibility = 1.0;
-	if(pixDepth > (lightDepth * 2.0 - 1))
+	if(pixDepth > lightDepth)
 	{
-		visibility = 0.0f;
+		visibility = 0.0;
 	}
 
 	vec3 reflectionVector = normalize(reflect(_LightDirection.xyz, normal.xyz)).xyz;

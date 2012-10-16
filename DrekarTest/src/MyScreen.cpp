@@ -32,7 +32,7 @@ void MyScreen::init()
 
 	//--------------------- Create field of object
 
-	for(int i = 0; i <= 10; i++)
+	/*for(int i = 0; i <= 10; i++)
 	{
 		for(int j = 0; j <= 10; j++)
 		{
@@ -43,7 +43,7 @@ void MyScreen::init()
 			obj->transform()->setPosition(glm::vec3(i*15, 5, j*15));
 			//obj->transform()->setScale(glm::vec3(0.01f,0.01f,0.01f));
 		}
-	}
+	}*/
 
 	//--------------------- Camera
 
@@ -53,7 +53,7 @@ void MyScreen::init()
 	//cam->setOrthoHalfSize(100);
 
 	lCam.transform()->setPosition(glm::vec3(50, 50, 50));
-	lCam.transform()->setRotation(glm::quat(glm::vec3(45, 0, 0)));
+	lCam.transform()->setRotation(glm::quat(glm::vec3(glm::radians(45.0f), 0, 0)));
 
 	lCam.addComponent(new CameraMover());
 
@@ -83,10 +83,14 @@ void MyScreen::init()
 	mLight = new de::GameObject();
 	Light* compLight = (Light*)mLight->addComponent(new de::component::DirectionalLight());
 	compLight->setColor(glm::vec3(1.0f,1.0f,1.0f));
+
+	lOrien = -45.0f;
+	//mLight->transform()->setRotation(glm::quat(glm::vec3(45.0f, 0.0f, 0.0f)));
 	
 
 	GameObject* terrainObj = new GameObject("terrain");
-	terrainObj->fromAsset("data/assets/terrain/terrain.asset");
+	terrainObj->transform()->setPosition(glm::vec3(100, 0, 100));
+	terrainObj->fromAsset("data/assets/village/village.asset");
 
 	lAngle = 0;
 }
@@ -110,7 +114,7 @@ void MyScreen::update()
 
 	if(input->getAxis("R") > 0.1f)
 	{
-		lOrien += 10.0f * de::GameTime::deltaTime();
+		lOrien += 20.0f * de::GameTime::deltaTime();
 	}
 
 	if(input->getAxis("F1") > 0.2f && !pressed)

@@ -14,9 +14,9 @@ smooth out vec2 theDepth;
 
 void main() 
 { 
-	gl_Position = MATRIX_P * MATRIX_V * MATRIX_M * vec4(inPosition, 1.0);
+	gl_Position =  MATRIX_P * MATRIX_V * MATRIX_M * vec4(inPosition, 1.0);
 
-	theNormal = (inverse(transpose(MATRIX_V * MATRIX_M)) * vec4(inNormal.xyz, 0.0)).xyz;
+	theNormal = (inverse(transpose(MATRIX_M)) * vec4(inNormal.xyz, 0.0)).xyz;
 
 	theDepth = gl_Position.zw;
 	theUv = inUV;

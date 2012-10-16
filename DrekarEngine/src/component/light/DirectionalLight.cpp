@@ -26,10 +26,10 @@ DirectionalLight::DirectionalLight()
 
 void DirectionalLight::init()
 {
-	mShadowmapBuffer.init(512, 512, false);
+	mShadowmapBuffer.init(1024, 1024, false);
 	
-	mShadowmap.create(512, 512);
-	mShadowmap.init(GL_DEPTH_COMPONENT16, GL_DEPTH_COMPONENT, GL_FLOAT);
+	mShadowmap.create(1024, 1024);
+	mShadowmap.init(GL_DEPTH_COMPONENT24, GL_DEPTH_COMPONENT, GL_FLOAT);
 
 	mShadowmap.setParameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	mShadowmap.setParameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -40,7 +40,7 @@ void DirectionalLight::init()
 	mLightCamera = (Camera*)mLightGameobject->addComponent(new Camera());
 
 	mLightCamera->setOrtho(true);
-	mLightCamera->setClipPlane(glm::vec2(0.01f, 1000.0f));
+	mLightCamera->setClipPlane(glm::vec2(0.1f, 500.0f));
 	mLightCamera->setOrthoHalfSize(100);
 	mLightCamera->setAspect(1.0f);
 }
@@ -64,9 +64,14 @@ void DirectionalLight::setup()
 {
 	Light::internalSetup(sDiretionalLightMat->program());
 
+	glm::mat4 biasMatrix(	0.5, 0.0, 0.0, 0.0,
+							0.0, 0.5, 0.0, 0.0,
+							0.0, 0.0, 0.5, 0.0,
+							0.5, 0.5, 0.5, 1.0 );
+
 	sDiretionalLightMat->program()->setVector4("_LightDirection", glm::vec4(mOwner->transform()->forward(), 0.0f));
 	sDiretionalLightMat->addTexture("_ShadowMap", &mShadowmap, true);
-	sDiretionalLightMat->program()->setMatrix("_VPLight", mLightCamera->projectionMatrix() * mLightCamera->viewMatrix());
+	sDiretionalLightMat->program()->setMatrix("_VPLight", biasMatrix * mLightCamera->projectionMatrix() * mLightCamera->viewMatrix());
 
 	Helpers::drawQuad();
 }

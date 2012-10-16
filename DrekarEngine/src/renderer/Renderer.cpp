@@ -167,17 +167,20 @@ void Renderer::render()
 
 	//**Render shadowmap
 
+	glEnable(GL_CULL_FACE);
+	//glCullFace(GL_BACK);
 	while(itLight != mapLight.end())
 	{
 		itLight->second->renderShadowmap();
 		itLight++;
 	}
+	//glCullFace(GL_FRONT);
 
 	//**Render lightbuffer
 	mLightBuffer.bind();
 
 	glDisable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+	//glEnable(GL_CULL_FACE);
 
 	glEnable(GL_BLEND);
 
