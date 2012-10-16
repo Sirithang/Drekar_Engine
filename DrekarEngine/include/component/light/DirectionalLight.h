@@ -26,6 +26,8 @@ namespace de
 			GameObject*			mLightGameobject;
 			Camera*				mLightCamera;
 
+			glm::mat4			mCurrentMat;
+
 		public:
 			DirectionalLight();
 

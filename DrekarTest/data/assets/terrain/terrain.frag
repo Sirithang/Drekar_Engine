@@ -21,6 +21,6 @@ void main()
 	float data = smoothstep(0.8, 1.0, slope);
 
 	outputColor = vec4(mix(rock, grass, data).xyz, 0.0);
-	outputNormal = vec4((theNormal + 1) * 0.5, 0);
+	outputNormal = vec4((theNormal + 1) * 0.5, 4);
 	outputDepth.r = theDepth.x / theDepth.y;
 }

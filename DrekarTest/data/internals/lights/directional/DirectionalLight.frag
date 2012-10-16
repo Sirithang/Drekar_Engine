@@ -31,18 +31,18 @@ void main()
 	position.z = depth;
 	position.w = 1.0f;
 
-	position = _InvertVP * position;
-	position.xyz /= position.w;
+	vec4 worldpos = _InvertVP * position;
+	worldpos.xyz /= worldpos.w;
 
 	//Compute position in Light Clip space
 
-	vec4 lightPix = _VPLight * vec4(position.xyz, 1.0);
+	vec4 lightPix = _VPLight * vec4(worldpos.xyz, 1.0);
 	lightPix.xyz /= lightPix.w;
 
-	//vec2 lightTex = (lightPix.xy + 1) * 0.5;
+	vec2 lightTex = vec2(lightPix.x* 0.5 + 0.5, lightPix.y* 0.5 + 0.5);
 
-	float pixDepth = lightPix.z;
-	float lightDepth = texture2D(_ShadowMap, lightPix.xy).x;
+	float pixDepth = lightPix.z * 0.5 + 0.5;
+	float lightDepth = texture2D(_ShadowMap, lightTex.xy).x;
 
 	float visibility = 1.0;
 	if(pixDepth > lightDepth)
@@ -50,8 +50,10 @@ void main()
 		visibility = 0.0;
 	}
 
+	
+
 	vec3 reflectionVector = normalize(reflect(_LightDirection.xyz, normal.xyz)).xyz;
-	vec3 pixelToCam = normalize(_CamPos.xyz-position.xyz);
+	vec3 pixelToCam = normalize(_CamPos.xyz-worldpos.xyz);
 
 	float spec =  specIntensity * pow( clamp(dot(reflectionVector, pixelToCam), 0.0, 1.0), normal.w);
 

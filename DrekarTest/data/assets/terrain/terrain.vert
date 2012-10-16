@@ -15,8 +15,7 @@ smooth out float slope;
 
 void main() 
 { 
-	mat4 MVP = MATRIX_P * MATRIX_V * MATRIX_M;
-	gl_Position = MVP * vec4(inPosition, 1.0);
+	gl_Position = MATRIX_P * MATRIX_V * MATRIX_M * vec4(inPosition, 1.0);
 
 	slope = clamp(abs(dot(inNormal.xyz, vec3(0,1,0))), 0.0, 1.0);
 

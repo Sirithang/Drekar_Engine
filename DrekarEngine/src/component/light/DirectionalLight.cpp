@@ -64,14 +64,9 @@ void DirectionalLight::setup()
 {
 	Light::internalSetup(sDiretionalLightMat->program());
 
-	glm::mat4 biasMatrix(	0.5, 0.0, 0.0, 0.0,
-							0.0, 0.5, 0.0, 0.0,
-							0.0, 0.0, 0.5, 0.0,
-							0.5, 0.5, 0.5, 1.0 );
-
 	sDiretionalLightMat->program()->setVector4("_LightDirection", glm::vec4(mOwner->transform()->forward(), 0.0f));
 	sDiretionalLightMat->addTexture("_ShadowMap", &mShadowmap, true);
-	sDiretionalLightMat->program()->setMatrix("_VPLight", biasMatrix * mLightCamera->projectionMatrix() * mLightCamera->viewMatrix());
+	sDiretionalLightMat->program()->setMatrix("_VPLight", mCurrentMat/*mLightCamera->projectionMatrix() * mLightCamera->viewMatrix()*/);
 
 	Helpers::drawQuad();
 }
@@ -83,9 +78,12 @@ void DirectionalLight::renderShadowmap()
 	Camera* pPrevious = Camera::current();
 
 	mLightGameobject->transform()->setRotation(mOwner->transform()->rotation());
-	mLightGameobject->transform()->setPosition(Camera::current()->owner()->transform()->position() - mLightGameobject->transform()->forward() * 30.0f);
+	//mLightGameobject->transform()->setPosition(Camera::current()->owner()->transform()->position() - mLightGameobject->transform()->forward() * 30.0f);
+	mLightGameobject->transform()->setPosition(glm::vec3(50,0,50) - mLightGameobject->transform()->forward() * 30.0f);
 
 	mLightCamera->setup();
+
+	mCurrentMat = component::Camera::current()->projectionMatrix() * component::Camera::current()->viewMatrix();
 
 	mShadowmapBuffer.bind();
 

@@ -32,7 +32,7 @@ void MyScreen::init()
 
 	//--------------------- Create field of object
 
-	/*for(int i = 0; i <= 10; i++)
+	for(int i = 0; i <= 10; i++)
 	{
 		for(int j = 0; j <= 10; j++)
 		{
@@ -43,7 +43,11 @@ void MyScreen::init()
 			obj->transform()->setPosition(glm::vec3(i*15, 5, j*15));
 			//obj->transform()->setScale(glm::vec3(0.01f,0.01f,0.01f));
 		}
-	}*/
+	}
+
+	GameObject* obj = new GameObject();
+	obj->fromAsset("data/assets/alien/alien.asset");
+	obj->transform()->setPosition(glm::vec3(50, 20, 50));
 
 	//--------------------- Camera
 
@@ -67,7 +71,7 @@ void MyScreen::init()
 	parentObj->transform()->setPosition(glm::vec3(100, 0, 100));
 	lLightObjs.push_back(parentObj);
 
-	for(int i = 0; i < 0; i++)
+	for(int i = 0; i < 5; i++)
 	{
 		lLight = new de::GameObject();
 
@@ -89,8 +93,9 @@ void MyScreen::init()
 	
 
 	GameObject* terrainObj = new GameObject("terrain");
-	terrainObj->transform()->setPosition(glm::vec3(100, 0, 100));
-	terrainObj->fromAsset("data/assets/village/village.asset");
+	/*terrainObj->transform()->setPosition(glm::vec3(100, 0, 100));
+	terrainObj->fromAsset("data/assets/village/village.asset");*/
+	terrainObj->fromAsset("data/assets/terrain/terrain.asset");
 
 	lAngle = 0;
 }
@@ -115,6 +120,10 @@ void MyScreen::update()
 	if(input->getAxis("R") > 0.1f)
 	{
 		lOrien += 20.0f * de::GameTime::deltaTime();
+	}
+	if(input->getAxis("T") > 0.1f)
+	{
+		lOrien -= 20.0f * de::GameTime::deltaTime();
 	}
 
 	if(input->getAxis("F1") > 0.2f && !pressed)

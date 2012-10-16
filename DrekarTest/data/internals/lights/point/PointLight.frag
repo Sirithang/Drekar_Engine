@@ -31,14 +31,14 @@ void main()
 	position.z = depth;
 	position.w = 1.0f;
 
-	position = _InvertVP * position;
-	position.xyz /= position.w;
+	vec4 worldpos = _InvertVP * position;
+	worldpos.xyz /= worldpos.w;
 
-	vec3 lightDir = _LightPos.xyz - position.xyz;
+	vec3 lightDir = _LightPos.xyz - worldpos.xyz;
 	vec3 nLightDir = normalize(lightDir);
 
 	vec3 reflectionVector = normalize(reflect(-nLightDir, normal.xyz));
-	vec3 pixelToCam = normalize(_CamPos.xyz-position.xyz);
+	vec3 pixelToCam = normalize(_CamPos.xyz-worldpos.xyz);
 
 	float attenuation = clamp(1.0 - length(lightDir)/_Radius, 0.0, 1.0); 
 	float spec =  specIntensity * pow( clamp(dot(reflectionVector, pixelToCam), 0.0, 1.0), normal.w);
